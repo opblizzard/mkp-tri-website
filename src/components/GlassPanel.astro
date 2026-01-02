@@ -1,0 +1,6 @@
+---
+const { ariaLabel = '', hover = true, className = '', ...props } = Astro.props;
+---
+<div class={`glass-stack ${hover ? 'hover-scroll' : ''} ${className}`} aria-label={ariaLabel} {...props}>
+  <slot />
+</div>

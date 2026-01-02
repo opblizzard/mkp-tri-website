@@ -4,12 +4,12 @@ import GlassCard from "@components/GlassCard.astro";
 import Timeline from "@components/Timeline.astro";
 ---
 <Layout title="MKP-TRI · Operations Terminal" description="Interact with MKP-TRI's core operations, logs, and pipelines.">
-  <header class="text-center glass max-w-2xl mx-auto mt-24 mb-10 py-10 px-4">
+  <GlassPanel ariaLabel="Operations Hero Panel" className="max-w-2xl mx-auto mt-24 mb-10 py-10 px-4 text-center">
     <h1 class="text-4xl font-bold text-codex-accent font-mono mb-2 drop-shadow-glow">Operations Terminal</h1>
     <p class="text-lg text-slate-200 font-mono mb-4">Interact with MKP-TRI's core operations, logs, and pipelines. Simulated terminal and pipeline overview below.</p>
-  </header>
-  <section class="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 px-2">
-    <GlassCard className="col-span-2 p-0 overflow-hidden">
+  </GlassPanel>
+  <div class="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 px-2">
+    <GlassPanel ariaLabel="Terminal Panel" className="col-span-2 p-0 overflow-hidden">
       <div class="bg-black/80 p-6 h-72 overflow-y-auto font-mono text-green-400 text-xs rounded-t-xl border-b border-glass-border">
         <div>// Deploy initiated at 2026-01-02 06:00 UTC</div>
         <div>Success: Artifact bound to commit abc123</div>
@@ -28,9 +28,9 @@ import Timeline from "@components/Timeline.astro";
         <input type="text" class="flex-1 px-3 py-2 rounded bg-white/10 text-white/80 border border-white/20 font-mono" placeholder="Enter command..." autocomplete="off" />
         <button type="submit" class="px-4 py-2 rounded bg-codex-accent text-black font-bold hover:bg-codex-accent/80 transition">Send</button>
       </form>
-    </GlassCard>
+    </GlassPanel>
     <div class="flex flex-col gap-6">
-      <GlassCard className="p-4">
+      <GlassPanel ariaLabel="Command Palette Panel" className="p-4">
         <h3 class="font-bold text-codex-accent mb-2 font-mono">Command Palette</h3>
         <ul class="font-mono text-xs text-slate-200 space-y-1">
           <li>sync:transparency – Update provenance data</li>
@@ -44,8 +44,8 @@ import Timeline from "@components/Timeline.astro";
           <li>help – Show command help</li>
           <li>exit – Close terminal</li>
         </ul>
-      </GlassCard>
-      <GlassCard className="p-4">
+      </GlassPanel>
+      <GlassPanel ariaLabel="Pipeline Overview Panel" className="p-4">
         <h3 class="font-bold text-codex-accent mb-2 font-mono">Pipeline Overview</h3>
         <Timeline items={[
           { year: "2026-01-02", event: "Deploy to Cloudflare" },
@@ -54,15 +54,15 @@ import Timeline from "@components/Timeline.astro";
           { year: "2025-12-30", event: "Genesis Validation" },
           { year: "2025-12-29", event: "Artifact Created" }
         ]} />
-      </GlassCard>
+      </GlassPanel>
     </div>
-  </section>
-  <section class="w-full max-w-3xl mx-auto px-2 mb-16">
+  </div>
+  <GlassPanel ariaLabel="Documentation Panel" className="w-full max-w-3xl mx-auto px-2 mb-16">
     <h2 class="text-2xl font-bold text-codex-accent mb-4 font-mono">Documentation</h2>
-    <div class="glass p-6 text-slate-200 text-base leading-relaxed">
+    <div class="text-slate-200 text-base leading-relaxed">
       Interact with MKP-TRI's core operations: the terminal above simulates logs and commands for transparency and artifact management. The command palette lists available actions, and the pipeline overview shows the CI/CD lineage. In the future, this page will integrate with AI-driven operations and real-time edge events.<br/><br/>
       Use the terminal to run commands like <span class="font-mono bg-black/40 px-1 rounded">sync:transparency</span> or <span class="font-mono bg-black/40 px-1 rounded">generate:artifact</span>. All actions are logged and bound to ceremonial checkpoints for full inspectability. <br/><br/>
       <b>Coming soon:</b> Live AI integration, real-time logs, and interactive artifact management.
     </div>
-  </section>
+  </GlassPanel>
 </Layout>

@@ -1,129 +1,130 @@
 ---
+import GlassPanel from "../components/GlassPanel.astro";
 import Layout from "@components/Layout.astro";
 import GlassCard from "@components/GlassCard.astro";
 ---
 <Layout title="MKP-TRI · Model Gallery" description="A gallery of creative models and artifacts.">
-  <header class="text-center glass max-w-2xl mx-auto mt-24 mb-10 py-10 px-4">
+  <GlassPanel ariaLabel="Gallery Hero Panel" className="max-w-2xl mx-auto mt-24 mb-10 py-10 px-4 text-center">
     <h1 class="text-4xl font-bold text-codex-accent font-mono mb-2 drop-shadow-glow">Model Gallery</h1>
     <p class="text-lg text-slate-200 font-mono mb-4">Behold the visual codex of MKP-TRI – where myths manifest as models, and generative art becomes ceremonial artifact. Explore the creative process and curated archive below.</p>
-  </header>
-  <section class="w-full max-w-7xl mx-auto px-6 mb-12">
+  </GlassPanel>
+  <GlassPanel ariaLabel="Gallery Grid Panel" className="w-full max-w-7xl mx-auto px-6 mb-12">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <!-- Pink–Purple Cathedral -->
-      <div class="glass rounded-xl overflow-hidden hover:scale-105 transition transform">
+      <GlassPanel ariaLabel="Pink–Purple Cathedral" className="overflow-hidden">
         <img src="https://images.stockcake.com/public/2/8/2/282fcc7f-bb41-456e-b8b5-b332459654c2_large/gothic-tech-cathedral-stockcake.jpg" alt="Pink–Purple Cathedral" class="w-full h-auto" />
         <div class="p-4 text-center">
           <h3 class="text-xl font-bold">Pink–Purple Cathedral</h3>
           <p>A ceremonial generative model, blending sacred geometry and vibrant hues.</p>
           <p class="text-sm text-cyan-400">ID: cathedral-v1 | #artifact 2026-01-01</p>
         </div>
-      </div>
+      </GlassPanel>
       <!-- Emerald Nexus -->
-      <div class="glass rounded-xl overflow-hidden hover:scale-105 transition transform">
+      <GlassPanel ariaLabel="Emerald Nexus" className="overflow-hidden">
         <img src="https://thumbs.dreamstime.com/b/s-ai-masterpiece-detailed-d-render-depicting-futuristic-metropolis-under-dark-sky-intricate-glowing-green-yellow-408763949.jpg" alt="Emerald Nexus" class="w-full h-auto" />
         <div class="p-4 text-center">
           <h3 class="text-xl font-bold">Emerald Nexus</h3>
           <p>A geometric fusion of nature and code.</p>
           <p class="text-sm text-cyan-400">ID: nexus-v2 | #artifact 2026-01-02</p>
         </div>
-      </div>
+      </GlassPanel>
       <!-- Cerulean Spiral -->
-      <div class="glass rounded-xl overflow-hidden hover:scale-105 transition transform">
+      <GlassPanel ariaLabel="Cerulean Spiral" className="overflow-hidden">
         <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Cerulean Spiral" class="w-full h-auto" />
         <div class="p-4 text-center">
           <h3 class="text-xl font-bold">Cerulean Spiral</h3>
           <p>Infinite spiral of blue, echoing cycles.</p>
           <p class="text-sm text-cyan-400">ID: spiral-v1 | #artifact 2026-01-03</p>
         </div>
-      </div>
+      </GlassPanel>
       <!-- Mythic Gate -->
-      <div class="glass rounded-xl overflow-hidden hover:scale-105 transition transform">
+      <GlassPanel ariaLabel="Mythic Gate" className="overflow-hidden">
         <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Mythic Gate" class="w-full h-auto" />
         <div class="p-4 text-center">
           <h3 class="text-xl font-bold">Mythic Gate</h3>
           <p>Gateway to mythic operations.</p>
           <p class="text-sm text-cyan-400">ID: gate-v1 | #artifact 2026-01-04</p>
         </div>
-      </div>
+      </GlassPanel>
       <!-- Genesis Prism -->
-      <div class="glass rounded-xl overflow-hidden hover:scale-105 transition transform">
+      <GlassPanel ariaLabel="Genesis Prism" className="overflow-hidden">
         <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Genesis Prism" class="w-full h-auto" />
         <div class="p-4 text-center">
           <h3 class="text-xl font-bold">Genesis Prism</h3>
           <p>Prismatic artifact for genesis cycles.</p>
           <p class="text-sm text-cyan-400">ID: prism-v1 | #artifact 2026-01-05</p>
         </div>
-      </div>
+      </GlassPanel>
       <!-- Obsidian Array -->
-      <div class="glass rounded-xl overflow-hidden hover:scale-105 transition transform">
+      <GlassPanel ariaLabel="Obsidian Array" className="overflow-hidden">
         <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=400&q=80" alt="Obsidian Array" class="w-full h-auto" />
         <div class="p-4 text-center">
           <h3 class="text-xl font-bold">Obsidian Array</h3>
           <p>Array of obsidian, reflecting edge logic.</p>
           <p class="text-sm text-cyan-400">ID: array-v1 | #artifact 2026-01-06</p>
         </div>
-      </div>
+      </GlassPanel>
       <!-- Aether Grid -->
-      <div class="glass rounded-xl overflow-hidden hover:scale-105 transition transform">
+      <GlassPanel ariaLabel="Aether Grid" className="overflow-hidden">
         <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=400&q=80" alt="Aether Grid" class="w-full h-auto" />
         <div class="p-4 text-center">
           <h3 class="text-xl font-bold">Aether Grid</h3>
           <p>Grid of aether, binding transparency.</p>
           <p class="text-sm text-cyan-400">ID: grid-v1 | #artifact 2026-01-07</p>
         </div>
-      </div>
+      </GlassPanel>
       <!-- Sovereign Glyph -->
-      <div class="glass rounded-xl overflow-hidden hover:scale-105 transition transform">
+      <GlassPanel ariaLabel="Sovereign Glyph" className="overflow-hidden">
         <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=400&q=80" alt="Sovereign Glyph" class="w-full h-auto" />
         <div class="p-4 text-center">
           <h3 class="text-xl font-bold">Sovereign Glyph</h3>
           <p>Glyph of sovereignty, etched in code.</p>
           <p class="text-sm text-cyan-400">ID: glyph-v1 | #artifact 2026-01-08</p>
         </div>
-      </div>
+      </GlassPanel>
       <!-- Edge Mandala -->
-      <div class="glass rounded-xl overflow-hidden hover:scale-105 transition transform">
+      <GlassPanel ariaLabel="Edge Mandala" className="overflow-hidden">
         <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Edge Mandala" class="w-full h-auto" />
         <div class="p-4 text-center">
           <h3 class="text-xl font-bold">Edge Mandala</h3>
           <p>Mandala for edge worker ceremonies.</p>
           <p class="text-sm text-cyan-400">ID: mandala-v1 | #artifact 2026-01-09</p>
         </div>
-      </div>
+      </GlassPanel>
       <!-- Omni Sigil -->
-      <div class="glass rounded-xl overflow-hidden hover:scale-105 transition transform">
+      <GlassPanel ariaLabel="Omni Sigil" className="overflow-hidden">
         <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Omni Sigil" class="w-full h-auto" />
         <div class="p-4 text-center">
           <h3 class="text-xl font-bold">Omni Sigil</h3>
           <p>Sigil for omni ingress.</p>
           <p class="text-sm text-cyan-400">ID: sigil-v1 | #artifact 2026-01-10</p>
         </div>
-      </div>
+      </GlassPanel>
       <!-- Ceremony Node -->
-      <div class="glass rounded-xl overflow-hidden hover:scale-105 transition transform">
+      <GlassPanel ariaLabel="Ceremony Node" className="overflow-hidden">
         <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Ceremony Node" class="w-full h-auto" />
         <div class="p-4 text-center">
           <h3 class="text-xl font-bold">Ceremony Node</h3>
           <p>Node for ceremonial computation.</p>
           <p class="text-sm text-cyan-400">ID: node-v1 | #artifact 2026-01-11</p>
         </div>
-      </div>
+      </GlassPanel>
       <!-- Codex Bloom -->
-      <div class="glass rounded-xl overflow-hidden hover:scale-105 transition transform">
+      <GlassPanel ariaLabel="Codex Bloom" className="overflow-hidden">
         <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=400&q=80" alt="Codex Bloom" class="w-full h-auto" />
         <div class="p-4 text-center">
           <h3 class="text-xl font-bold">Codex Bloom</h3>
           <p>Bloom of codex, ever-expanding.</p>
           <p class="text-sm text-cyan-400">ID: bloom-v1 | #artifact 2026-01-12</p>
         </div>
-      </div>
+      </GlassPanel>
     </div>
-  </section>
-  <section class="w-full max-w-3xl mx-auto px-2 mb-16">
+  </GlassPanel>
+  <GlassPanel ariaLabel="About Gallery Panel" className="w-full max-w-3xl mx-auto px-2 mb-16">
     <h2 class="text-2xl font-bold text-codex-accent mb-4 font-mono">About the Gallery</h2>
-    <div class="glass p-6 text-slate-200 text-base leading-relaxed">
+    <div class="text-slate-200 text-base leading-relaxed">
       Behold the visual codex of MKP-TRI – where myths manifest as models, and generative art becomes ceremonial artifact. Each entry is a sovereign creation, blending sacred geometry, code, and transparency. The gallery is curated to inspire, archive, and expand the mythic edge of digital sovereignty.<br/><br/>
       From the Pink–Purple Cathedral to the Codex Bloom, every artifact is a checkpoint in the living archive. Explore, inspect, and contribute to the creative evolution of MKP-TRI.
     </div>
-  </section>
+  </GlassPanel>
 </Layout>

@@ -14,6 +14,22 @@ const { title = "MKP-TRI", description = "Living Codex for Mythic Operations" } 
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
   </head>
   <body class="bg-codex-gradient min-h-screen">
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.glass-stack').forEach(panel => {
+          const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                panel.classList.add('hover-scroll');
+              } else {
+                panel.classList.remove('hover-scroll');
+              }
+            });
+          }, { threshold: 0.5 });
+          observer.observe(panel);
+        });
+      });
+    </script>
     <Header />
     <div class="h-20"></div>
     <main class="pb-12 px-2 sm:px-6">

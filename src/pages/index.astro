@@ -17,51 +17,51 @@ import content from "@data/content.json";
         <rect width="100%" height="100%" fill="url(#grid)" />
       </svg>
     </div>
-    <header class="text-center glass max-w-2xl mx-auto mt-24 mb-10 py-10 px-4">
+    <GlassPanel ariaLabel="Hero Panel" className="max-w-2xl mx-auto mt-24 mb-10 py-10 px-4 text-center">
       <h1 class="text-4xl sm:text-5xl font-bold text-white drop-shadow-glow mb-4">MKP-TRI — Living Codex</h1>
       <p class="text-lg text-slate-200 font-mono mb-4">MKP-TRI is a sovereign platform for mythic operations, blending AI, art, and transparency. Explore cycles of creation where every artifact is verifiable.</p>
       <div class="flex flex-wrap justify-center gap-4 mb-4">
-        <GlassCard as="a" href="/codex" className="w-40 text-center cursor-pointer">
+        <GlassPanel as="a" href="/codex" ariaLabel="Codex Panel" className="w-40 text-center cursor-pointer">
           <h3 class="font-bold text-codex-accent mb-1">Codex</h3>
           <p class="text-xs text-slate-300">Chronological ceremonies, artifacts, checkpoints.</p>
-        </GlassCard>
-        <GlassCard as="a" href="/omni" className="w-40 text-center cursor-pointer">
+        </GlassPanel>
+        <GlassPanel as="a" href="/omni" ariaLabel="Omni Panel" className="w-40 text-center cursor-pointer">
           <h3 class="font-bold text-codex-accent mb-1">Omni</h3>
           <p class="text-xs text-slate-300">Idea ingress, mythic systems, AI console.</p>
-        </GlassCard>
-        <GlassCard as="a" href="/transparency" className="w-40 text-center cursor-pointer">
+        </GlassPanel>
+        <GlassPanel as="a" href="/transparency" ariaLabel="Transparency Panel" className="w-40 text-center cursor-pointer">
           <h3 class="font-bold text-codex-accent mb-1">Transparency</h3>
           <p class="text-xs text-slate-300">Deployment state, provenance, CI/CD lineage.</p>
-        </GlassCard>
+        </GlassPanel>
       </div>
       <div class="flex justify-center gap-6 mt-4">
         <div class="font-mono text-xs bg-black/40 rounded px-3 py-2 text-codex-accent shadow-glass">Commits: {content.stats.commits}</div>
         <div class="font-mono text-xs bg-black/40 rounded px-3 py-2 text-codex-accent shadow-glass">Last Sync: {content.stats.lastSync}</div>
         <div class="font-mono text-xs bg-black/40 rounded px-3 py-2 text-codex-accent shadow-glass">Artifacts: {content.stats.artifacts}</div>
       </div>
-    </header>
-    <section class="w-full max-w-5xl mx-auto px-2 mb-12">
+    </GlassPanel>
+    <GlassPanel ariaLabel="Featured Artifacts Panel" className="w-full max-w-5xl mx-auto px-2 mb-12">
       <h2 class="text-2xl font-bold text-codex-accent mb-4 font-mono">Featured Artifacts</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {content.featuredArtifacts.map((a) => (
-          <GlassCard className="flex flex-col items-center p-4">
+          <GlassPanel ariaLabel={a.title} className="flex flex-col items-center p-4">
             <img src={a.img} alt={a.title} class="rounded-lg mb-3 w-full h-32 object-cover" loading="lazy" />
             <h3 class="font-bold text-codex-accent mb-1">{a.title}</h3>
             <p class="text-xs text-slate-300 text-center">{a.desc}</p>
-          </GlassCard>
+          </GlassPanel>
         ))}
       </div>
-    </section>
-    <section class="w-full max-w-3xl mx-auto px-2 mb-12">
+    </GlassPanel>
+    <GlassPanel ariaLabel="Latest Updates Panel" className="w-full max-w-3xl mx-auto px-2 mb-12">
       <h2 class="text-2xl font-bold text-codex-accent mb-4 font-mono">Latest Updates</h2>
       <Timeline items={content.timeline} />
-    </section>
-    <section class="w-full max-w-3xl mx-auto px-2 mb-16">
+    </GlassPanel>
+    <GlassPanel ariaLabel="About Panel" className="w-full max-w-3xl mx-auto px-2 mb-16">
       <h2 class="text-2xl font-bold text-codex-accent mb-4 font-mono">About MKP-TRI</h2>
-      <div class="glass p-6 text-slate-200 text-base leading-relaxed">
+      <div class="text-slate-200 text-base leading-relaxed">
         In the ether of digital sovereignty, MKP-TRI emerges as a beacon for mythic operations. Every cycle, ceremony, and artifact is bound to a verifiable checkpoint, ensuring eternal inspectability. The Living Codex is not just a record—it's a living, breathing archive of creation, where AI, art, and transparency converge. <br/><br/>
         From the genesis of the Codex to the latest edge worker deployments, each event is a sovereign act, witnessed and preserved. Join the journey—explore, inspect, and contribute to the mythic evolution of MKP-TRI.
       </div>
-    </section>
+    </GlassPanel>
   </div>
 </Layout>

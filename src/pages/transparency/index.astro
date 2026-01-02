@@ -1,18 +1,18 @@
 ---
 import Layout from "@components/Layout.astro";
-import GlassCard from "@components/GlassCard.astro";
+import GlassPanel from "@components/GlassPanel.astro";
 import Timeline from "@components/Timeline.astro";
 import TransparencyPanel from "@components/TransparencyPanel.astro";
 
 const lastSync = new Date().toISOString();
 ---
 <Layout title="MKP-TRI · Transparency" description="Public provenance and deployment lineage for MKP-TRI.">
-  <header class="text-center glass max-w-2xl mx-auto mt-24 mb-10 py-10 px-4">
+  <GlassPanel ariaLabel="Transparency Hero Panel" className="max-w-2xl mx-auto mt-24 mb-10 py-10 px-4 text-center">
     <h1 class="text-4xl font-bold text-codex-accent font-mono mb-2 drop-shadow-glow">Transparency</h1>
     <p class="text-lg text-slate-200 font-mono mb-4">Open operations, public ledgers, and radical transparency are core to MKP-TRI. Inspect the principles, timeline, and ongoing efforts below.</p>
-  </header>
-  <section class="w-full max-w-4xl mx-auto px-2 mb-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-    <GlassCard className="p-6">
+  </GlassPanel>
+  <GlassPanel ariaLabel="Transparency Principles & Timeline Panel" className="w-full max-w-4xl mx-auto px-2 mb-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+    <GlassPanel ariaLabel="Transparency Principles" className="p-6">
       <h3 class="font-semibold mb-2 text-codex-accent font-mono text-lg">Transparency Principles</h3>
       <ul class="list-disc ml-6 text-slate-300 text-base">
         <li>Open source code and models</li>
@@ -20,8 +20,8 @@ const lastSync = new Date().toISOString();
         <li>Real-time artifact provenance</li>
         <li>Community-driven audits</li>
       </ul>
-    </GlassCard>
-    <GlassCard className="p-6">
+    </GlassPanel>
+    <GlassPanel ariaLabel="Transparency Timeline" className="p-6">
       <h3 class="font-semibold mb-2 text-codex-accent font-mono text-lg">Transparency Timeline</h3>
       <Timeline items={[
         { year: "2023", event: "Genesis protocol open-sourced" },
@@ -29,23 +29,21 @@ const lastSync = new Date().toISOString();
         { year: "2025", event: "Real-time transparency dashboard" },
         { year: "2026", event: "Omni audit pipeline deployed" },
       ]} />
-    </GlassCard>
-  </section>
-  <section class="w-full max-w-3xl mx-auto px-2 mb-12">
-    <GlassCard className="p-6">
-      <h3 class="font-semibold mb-2 text-codex-accent font-mono text-lg">Deployment Provenance</h3>
-      <TransparencyPanel
-        lastSync={lastSync}
-        sourceRepo="https://github.com/opblizzard/mkp-tri"
-        currentBranch="main"
-      />
-    </GlassCard>
-  </section>
-  <section class="w-full max-w-3xl mx-auto px-2 mb-16">
+    </GlassPanel>
+  </GlassPanel>
+  <GlassPanel ariaLabel="Deployment Provenance Panel" className="w-full max-w-3xl mx-auto px-2 mb-12">
+    <h3 class="font-semibold mb-2 text-codex-accent font-mono text-lg">Deployment Provenance</h3>
+    <TransparencyPanel
+      lastSync={lastSync}
+      sourceRepo="https://github.com/opblizzard/mkp-tri"
+      currentBranch="main"
+    />
+  </GlassPanel>
+  <GlassPanel ariaLabel="Why Transparency Panel" className="w-full max-w-3xl mx-auto px-2 mb-16">
     <h2 class="text-2xl font-bold text-codex-accent mb-4 font-mono">Why Transparency?</h2>
-    <div class="glass p-6 text-slate-200 text-base leading-relaxed">
+    <div class="text-slate-200 text-base leading-relaxed">
       Transparency is the foundation of trust and sovereignty in MKP-TRI. Every operation, artifact, and protocol is open for inspection, audit, and contribution. Radical transparency ensures that the mythic edge remains accountable, collaborative, and ever-evolving.<br/><br/>
       Join the community in shaping the future of open, inspectable computation.
     </div>
-  </section>
+  </GlassPanel>
 </Layout>
