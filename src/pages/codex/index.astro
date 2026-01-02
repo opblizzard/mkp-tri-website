@@ -9,23 +9,21 @@ const entries = getCodexEntries();
 ---
 
 <Layout title="MKP-TRI · Codex" description="Ceremonial checkpoints and artifacts for MKP-TRI.">
-  <Header />
-
-  <section>
-    <h2 class="text-lg font-semibold mb-2">Codex</h2>
-    <p class="text-sm text-mkp-muted mb-4">
+  <section class="glass w-full max-w-full sm:max-w-3xl px-2 sm:px-8 py-6 sm:py-10 mx-auto mt-16 sm:mt-20 mb-8 sm:mb-12">
+    <h2 class="text-2xl sm:text-3xl font-bold mb-2 text-codex-accent font-mono">Codex</h2>
+    <p class="text-base text-slate-300 mb-4 sm:mb-6 font-mono">
       A chronological list of cycles and artifacts. Each entry is a sovereign event, bound to a commit.
     </p>
-
     {entries.length === 0 ? (
-      <p class="text-sm text-mkp-muted">No entries yet. The codex is waiting for its first inscription.</p>
+      <p class="text-base text-slate-400 font-mono">No entries yet. The codex is waiting for its first inscription.</p>
     ) : (
-      entries
-        .slice()
-        .sort((a, b) => (a.timestamp < b.timestamp ? 1 : -1))
-        .map((entry) => <CodexEntry {...entry} />)
+      <div class="space-y-3 sm:space-y-4">
+        {entries
+          .slice()
+          .sort((a, b) => (a.timestamp < b.timestamp ? 1 : -1))
+          .map((entry) => <CodexEntry {...entry} />)}
+      </div>
     )}
   </section>
-
   <Footer />
 </Layout>

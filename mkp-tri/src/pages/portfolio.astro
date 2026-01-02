@@ -34,34 +34,34 @@ const sealedSections = [
   className="portfolio-body"
 >
   <section class="fibonacci-section portfolio-shell">
-    <header class="portfolio-hero">
-      <p class="hero-kicker">MKP-TRI // sealed line</p>
+    <header class="glass w-full max-w-full sm:max-w-3xl px-2 sm:px-8 py-6 sm:py-10 mx-auto mt-16 sm:mt-20 mb-8 sm:mb-12">
+      <p class="font-mono text-codex-accent text-xs sm:text-sm mb-2">MKP-TRI // sealed line</p>
       <div>
-        <h1 class="fibonacci-header">Genesis Portfolio Gate</h1>
-        <p>
+        <h1 class="text-2xl sm:text-3xl font-bold mb-2 text-codex-accent font-mono">Genesis Portfolio Gate</h1>
+        <p class="text-base text-slate-300 mb-4 sm:mb-6 font-mono">
           Private workstream containing ceremony decks, telemetry stacks, and cathedral studies.
           Present a valid key to lift the veil.
         </p>
       </div>
-      <div class="fibonacci-grid grid gap-[var(--fib-3)] md:grid-cols-2">
+      <div class="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2">
         {sealedSections.map((section) => (
-          <div class="glass-panel border-glow flex flex-col gap-[var(--fib-2)] p-[var(--fib-3)]">
-            <h2 class="text-xl font-semibold">{section.title}</h2>
-            <p class="text-sm text-white/70">{section.summary}</p>
-            <ul>
+          <div class="glass flex flex-col gap-2 p-4 sm:p-6">
+            <h2 class="text-lg sm:text-xl font-semibold text-codex-accent font-mono">{section.title}</h2>
+            <p class="text-sm text-slate-300">{section.summary}</p>
+            <ul class="space-y-2">
               {section.entries.map((entry) => (
                 <li class="artifact-card">
-                  <span class="font-bold">{entry.title}</span> <span class="text-xs">({entry.cycle}, {entry.domain}, {entry.ritualType})</span>
-                  <p>{entry.description}</p>
+                  <span class="font-bold">{entry.title}</span> <span class="text-xs text-slate-400 font-mono">({entry.cycle}, {entry.domain}, {entry.ritualType})</span>
+                  <p class="text-slate-300">{entry.description}</p>
                 </li>
               ))}
             </ul>
           </div>
         ))}
       </div>
-      <div class="portfolio-filters flex gap-[var(--fib-2)] mt-[var(--fib-3)]">
+      <div class="flex flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-6">
         {filters.map((filter) => (
-          <button class="filter-btn px-3 py-1 rounded bg-white/10 text-white/80 hover:bg-white/20 transition">{filter}</button>
+          <button class="px-3 py-1 rounded bg-white/10 text-white/80 hover:bg-white/20 transition font-mono">{filter}</button>
         ))}
       </div>
     </header>

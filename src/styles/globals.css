@@ -3,22 +3,22 @@
 @tailwind utilities;
 
 body {
-  @apply bg-mkp-background text-mkp-text font-sans;
+  @apply bg-codex-bg text-slate-100 font-sans;
 }
 
 a {
-  @apply text-mkp-accent underline-offset-4 transition-colors;
+  @apply text-codex-accent underline-offset-4 transition-colors;
 }
 
 a:hover {
-  color: #fde68a;
+  color: #a78bfa;
   text-decoration: underline;
 }
 
-.card, .border, .rounded-lg, .bg-mkp-surface\/60 {
-  box-shadow: 0 2px 16px 0 rgba(68,49,141,0.08);
+.glass {
+  @apply bg-white/5 backdrop-blur-md border border-glass-border rounded-xl shadow-lg;
 }
 
 .code-shell {
-  @apply bg-mkp-surface border border-mkp-muted/40 rounded-lg p-4 font-mono text-sm;
+  @apply bg-black/30 border border-glass-border rounded-lg p-4 font-mono text-base text-slate-100;
 }

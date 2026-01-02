@@ -9,19 +9,22 @@ const nav = [
 ];
 ---
 
-<header class="mb-8 border-b border-mkp-muted/30 pb-4 flex items-center justify-between">
-  <div>
-    <h1 class="text-xl font-semibold tracking-tight">MKP-TRI</h1>
-    <p class="text-sm text-mkp-muted">Living codex and operations terminal</p>
+<header class="glass fixed top-0 left-0 w-full z-50 mb-8 pb-4 flex flex-col sm:flex-row items-center justify-between px-4 sm:px-6 py-2 sm:py-3 border-b border-glass-border backdrop-blur-md gap-2 sm:gap-0">
+  <div class="flex flex-col items-center sm:items-start">
+    <span class="font-mono text-codex-accent text-base sm:text-lg font-bold tracking-tight">MKP-TRI — Living Codex</span>
+    <span class="text-xs text-slate-400 font-mono">Sovereign & Inspectable</span>
   </div>
-  <nav class="flex gap-4 text-sm">
+  <nav class="flex flex-wrap justify-center gap-3 sm:gap-6 text-sm w-full sm:w-auto">
     {nav.map((item) => (
       <a
         href={item.href}
-        class="text-mkp-muted hover:text-mkp-accent transition-colors"
+        class="text-slate-300 hover:text-codex-accent font-medium transition-colors px-1 py-0.5 rounded"
       >
         {item.label}
       </a>
     ))}
+    <button aria-label="Toggle dark mode" class="ml-2 sm:ml-4 p-1 rounded hover:bg-white/10 transition-colors">
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="text-codex-accent"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 5.66l-.71-.71M4.05 4.05l-.71-.71"/></svg>
+    </button>
   </nav>
 </header>

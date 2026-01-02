@@ -7,9 +7,9 @@ import { getUnifiedState } from '../omni/UnifiedContext';
 <OperationsLayout title="Operations Terminal" description="Live Genesis validation, Omni heartbeat, and Codex event logs.">
 	{(() => { const unified = getUnifiedState(Astro.locals.omni); return null; })()}
 	<section class="fibonacci-section flex flex-col gap-[var(--fib-5)]">
-		<header class="text-center">
-			<h1 class="fibonacci-header gradient-text text-4xl font-semibold">Operations Terminal</h1>
-			<p class="mx-auto mt-3 max-w-2xl text-white/70">Monitor live logs, validate Genesis, and track Omni Engine heartbeat in real time.</p>
+		<header class="text-center glass w-full max-w-full sm:max-w-3xl px-2 sm:px-8 py-6 sm:py-10 mx-auto mt-16 sm:mt-20 mb-8 sm:mb-12">
+			<h1 class="text-2xl sm:text-3xl font-bold mb-2 text-codex-accent font-mono">Operations Terminal</h1>
+			<p class="mx-auto mt-3 max-w-2xl text-slate-300 font-mono">Monitor live logs, validate Genesis, and track Omni Engine heartbeat in real time.</p>
 		</header>
 
 		<div class="terminal-ui glass-panel border-glow flex flex-col gap-[var(--fib-3)] p-[var(--fib-4)]">

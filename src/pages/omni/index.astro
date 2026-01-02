@@ -6,17 +6,13 @@ import OmniConsole from "@components/OmniConsole.astro";
 ---
 
 <Layout title="MKP-TRI · Omni Interface" description="Omni console for idea ingress and cycle orchestration.">
-  <Header />
-
-  <section>
-    <h2 class="text-lg font-semibold mb-2">Omni Interface</h2>
-    <p class="text-sm text-mkp-muted mb-4">
+  <section class="glass w-full max-w-full sm:max-w-3xl px-2 sm:px-8 py-6 sm:py-10 mx-auto mt-16 sm:mt-20 mb-8 sm:mb-12">
+    <h2 class="text-2xl sm:text-3xl font-bold mb-2 text-codex-accent font-mono">Omni Interface</h2>
+    <p class="text-base text-slate-300 mb-4 sm:mb-6 font-mono">
       This console is the staging ground between vision and artifact. For now, it is a UI stub awaiting
       a bound AI endpoint at the edge.
     </p>
+    <OmniConsole />
   </section>
-
-  <OmniConsole />
-
   <Footer />
 </Layout>

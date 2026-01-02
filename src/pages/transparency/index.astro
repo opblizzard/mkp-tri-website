@@ -8,21 +8,17 @@ const lastSync = new Date().toISOString();
 ---
 
 <Layout title="MKP-TRI · Transparency" description="Public provenance and deployment lineage for MKP-TRI.">
-  <Header />
-
-  <section class="space-y-4">
-    <h2 class="text-lg font-semibold">Transparency</h2>
-    <p class="text-sm text-mkp-muted max-w-2xl">
+  <section class="glass w-full max-w-full sm:max-w-3xl px-2 sm:px-8 py-6 sm:py-10 mx-auto mt-16 sm:mt-20 mb-8 sm:mb-12">
+    <h2 class="text-2xl sm:text-3xl font-bold mb-2 text-codex-accent font-mono">Transparency</h2>
+    <p class="text-base text-slate-300 mb-4 sm:mb-6 font-mono">
       This page exposes the deployment state and lineage of the codex.
       Over time, you can bind this to CI events, Worker logs, or artifact streams.
     </p>
-
     <TransparencyPanel
       lastSync={lastSync}
       sourceRepo="https://github.com/opblizzard/mkp-tri"
       currentBranch="main"
     />
   </section>
-
   <Footer />
 </Layout>

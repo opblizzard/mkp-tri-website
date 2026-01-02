@@ -6,38 +6,38 @@ import TransparencyPanel from "@components/TransparencyPanel.astro";
 ---
 
 <Layout title="MKP-TRI · Living Codex" description="Sovereign archive of MK cycles and operations.">
-  <Header />
-
-  <section class="space-y-4">
-    <h2 class="text-lg font-semibold">
-      Living codex for MKP-TRI
-    </h2>
-    <p class="text-sm text-mkp-muted max-w-2xl">
-      This site is a public, inspectable record of cycles, artifacts, and operations.
-      Every change is a ceremonial checkpoint, bound to a commit and visible at the edge.
-    </p>
-
-    <div class="grid gap-4 md:grid-cols-3 mt-4">
-      <a href="/codex" class="border border-mkp-muted/30 rounded-lg p-4 hover:border-mkp-accent transition-colors">
-        <h3 class="text-sm font-semibold mb-1">Codex</h3>
-        <p class="text-xs text-mkp-muted">
-          Browse ceremonies, artifacts, and checkpoints in chronological order.
-        </p>
+  <section class="relative flex flex-col items-center justify-center min-h-[60vh] text-center mb-8 sm:mb-12 px-2">
+    <div class="absolute inset-0 pointer-events-none select-none opacity-40" aria-hidden="true" style="z-index:-1;">
+      <svg width="100%" height="100%" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#334155" stroke-width="1" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+      </svg>
+    </div>
+    <h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 font-sans tracking-tight drop-shadow-lg">MKP-TRI — Living Codex</h1>
+    <p class="text-base xs:text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto mb-6 sm:mb-8 font-mono">Sovereign, Inspectable Transparency Portal</p>
+    <div class="flex flex-col xs:flex-row flex-wrap gap-4 sm:gap-6 justify-center mt-4 sm:mt-6 w-full">
+      <a href="/codex" class="glass w-full xs:w-auto px-4 sm:px-8 py-4 sm:py-6 min-w-[180px] sm:min-w-[220px] text-left hover:border-codex-accent transition-all border border-glass-border">
+        <h3 class="text-base font-bold mb-1 text-codex-accent font-mono">Codex</h3>
+        <p class="text-xs text-slate-300">Browse ceremonies, artifacts, and checkpoints in chronological order.</p>
       </a>
-      <a href="/omni" class="border border-mkp-muted/30 rounded-lg p-4 hover:border-mkp-accent transition-colors">
-        <h3 class="text-sm font-semibold mb-1">Omni</h3>
-        <p class="text-xs text-mkp-muted">
-          Interface for idea ingress and mythic systems architecture.
-        </p>
+      <a href="/omni" class="glass w-full xs:w-auto px-4 sm:px-8 py-4 sm:py-6 min-w-[180px] sm:min-w-[220px] text-left hover:border-codex-accent transition-all border border-glass-border">
+        <h3 class="text-base font-bold mb-1 text-codex-accent font-mono">Omni</h3>
+        <p class="text-xs text-slate-300">Interface for idea ingress and mythic systems architecture.</p>
       </a>
-      <a href="/transparency" class="border border-mkp-muted/30 rounded-lg p-4 hover:border-mkp-accent transition-colors">
-        <h3 class="text-sm font-semibold mb-1">Transparency</h3>
-        <p class="text-xs text-mkp-muted">
-          Deployment state, provenance, and CI/CD lineage.
-        </p>
+      <a href="/transparency" class="glass w-full xs:w-auto px-4 sm:px-8 py-4 sm:py-6 min-w-[180px] sm:min-w-[220px] text-left hover:border-codex-accent transition-all border border-glass-border">
+        <h3 class="text-base font-bold mb-1 text-codex-accent font-mono">Transparency</h3>
+        <p class="text-xs text-slate-300">Deployment state, provenance, and CI/CD lineage.</p>
       </a>
     </div>
+    <div class="mt-10 w-full flex justify-center">
+      <TransparencyPanel />
+    </div>
   </section>
+  <Footer />
 
   <TransparencyPanel />
 

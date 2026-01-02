@@ -20,9 +20,9 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION, className = '' } = A
     <title>{title}</title>
     <meta name="description" content={description} />
   </head>
-  <body class={className}>
+  <body class={className + ' bg-codex-bg min-h-screen'}>
     <Header />
-    <main>
+    <main class="glass max-w-full sm:max-w-4xl mx-auto mt-28 sm:mt-32 mb-8 sm:mb-12 px-2 sm:px-6 py-6 sm:py-10 shadow-xl">
       <slot />
     </main>
     <Footer />
