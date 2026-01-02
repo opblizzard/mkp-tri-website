@@ -1,21 +1,11 @@
+
 import Layout from "@components/Layout.astro";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
-import CodexEntry from "@components/CodexEntry.astro";
-import { getCodexEntries } from "@lib/codex";
 import GlassCard from "@components/GlassCard.astro";
 import Timeline from "@components/Timeline.astro";
+import CodexEntry from "@components/CodexEntry.astro";
+import { getCodexEntries } from "@lib/codex";
 
 const entries = getCodexEntries();
-<Layout title="MKP-TRI · Codex" description="Ceremonial checkpoints and artifacts for MKP-TRI.">
-  <header class="text-center glass max-w-2xl mx-auto mt-24 mb-10 py-10 px-4">
-    <h1 class="text-4xl font-bold text-codex-accent font-mono mb-2 drop-shadow-glow">Codex</h1>
-    <p class="text-lg text-slate-200 font-mono mb-4">A chronological archive of cycles and artifacts. Each entry is a sovereign event, bound to a commit and ceremony.</p>
-  </header>
-  <section class="w-full max-w-4xl mx-auto px-2 mb-12 grid grid-cols-1 gap-8">
-    <GlassCard className="p-6">
-      <h3 class="font-semibold mb-2 text-codex-accent font-mono text-lg">About the Codex</h3>
-      <p class="text-base text-slate-300 mb-2">The Codex is the living archive of MKP-TRI. Every cycle, artifact, and protocol checkpoint is inscribed here for transparency, provenance, and mythic continuity.</p>
     </GlassCard>
     <GlassCard className="p-6">
       <h3 class="font-semibold mb-2 text-codex-accent font-mono text-lg">Codex Timeline</h3>
