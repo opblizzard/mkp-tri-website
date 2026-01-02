@@ -3,9 +3,11 @@ import Layout from "@components/Layout.astro";
 import GlassPanel from "@components/GlassPanel.astro";
 import Timeline from "@components/Timeline.astro";
 import TransparencyPanel from "@components/TransparencyPanel.astro";
+import Header from "@components/Header.astro";
 
 const lastSync = new Date().toISOString();
 ---
+<Header />
 <Layout title="MKP-TRI · Transparency" description="Public provenance and deployment lineage for MKP-TRI.">
   <GlassPanel ariaLabel="Transparency Hero Panel" className="max-w-2xl mx-auto mt-24 mb-10 py-10 px-4 text-center">
     <h1 class="text-4xl font-bold text-codex-accent font-mono mb-2 drop-shadow-glow">Transparency</h1>
