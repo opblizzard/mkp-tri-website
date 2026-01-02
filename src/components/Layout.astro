@@ -13,10 +13,20 @@ const { title = "MKP-TRI", description = "Living codex", ogImage = "/og/default-
     <meta property="og:image" content={ogImage} />
     <link rel="icon" href="/og/default-og.png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="/tick.js" defer></script>
   </head>
   <body class="min-h-screen flex flex-col" style="background: linear-gradient(135deg, #18122B 0%, #44318D 100%); font-family: 'Inter', system-ui, sans-serif;">
     <main class="flex-1 max-w-5xl mx-auto px-4 py-8">
-      <slot />
+      <div x-data="{ tick: Date.now(), mounted: false }" x-init="
+        mounted = true;
+        if (window.mkptriTick) {
+          window.mkptriTick.subscribe(v => tick = v);
+        }
+      ">
+        <div class='text-xs text-cyan-300 mb-2' x-text="'Real-time tick: ' + new Date(tick).toLocaleTimeString()"></div>
+        <slot />
+      </div>
     </main>
   </body>
 </html>
