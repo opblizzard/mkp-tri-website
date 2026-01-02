@@ -11,10 +11,12 @@ const { title = "MKP-TRI", description = "Living Codex for Mythic Operations" } 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
   </head>
   <body class="bg-codex-gradient min-h-screen">
     <Header />
-    <main class="pt-20 pb-12 px-2 sm:px-6">
+    <div class="h-20"></div>
+    <main class="pb-12 px-2 sm:px-6">
       <slot />
     </main>
     <Footer />

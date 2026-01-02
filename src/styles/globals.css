@@ -1,3 +1,7 @@
+/* Glassmorphism utility */
+.glass {
+  @apply bg-black/20 backdrop-blur-sm border border-white/10;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
