@@ -1,0 +1,8 @@
+# Netlify/Vercel-style redirects for Astro static site
+# Redirect all navigation links to their respective pages
+/codex      /codex/index.html   200
+/omni       /omni/index.html    200
+/transparency /transparency/index.html 200
+/gallery    /gallery/index.html 200
+/operations /operations/index.html 200
+/            /index.html        200
