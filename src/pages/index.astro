@@ -1,5 +1,6 @@
 ---
 import Header from "@components/Header.astro";
+import ArtifactModal from "@components/ArtifactModal.astro";
 ---
 
 <Header />
@@ -18,6 +19,31 @@ import Header from "@components/Header.astro";
         <span x-show="!loading">Refresh Stats</span>
         <span x-show="loading" class="animate-pulse">Refreshing...</span>
       </button>
+    </div>
+
+    <!-- Sub-Dashboard Cards (Flowbite Cards) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a href="/operations/" class="glass-panel p-6 hover:scale-105 transition-transform">
+        <h3 class="text-2xl mb-2">Operations Terminal</h3>
+        <p>Run stubs, view pipelines.</p>
+      </a>
+      <a href="/gallery/" class="glass-panel p-6 hover:scale-105 transition-transform">
+        <h3 class="text-2xl mb-2">Gallery Dashboard</h3>
+        <p>Filter & view 12+ artifacts.</p>
+        <div class="mt-4"><ArtifactModal /></div>
+      </a>
+      <a href="/transparency/" class="glass-panel p-6 hover:scale-105 transition-transform">
+        <h3 class="text-2xl mb-2">Transparency Dashboard</h3>
+        <p>Provenance, CI/CD, commit graph.</p>
+      </a>
+      <a href="/omni/" class="glass-panel p-6 hover:scale-105 transition-transform">
+        <h3 class="text-2xl mb-2">Omni Dashboard</h3>
+        <p>Ingress ideas via LLM Engine.</p>
+      </a>
+      <a href="/codex/" class="glass-panel p-6 hover:scale-105 transition-transform">
+        <h3 class="text-2xl mb-2">Codex Dashboard</h3>
+        <p>Cycles, artifacts, checkpoints.</p>
+      </a>
     </div>
 
     <!-- Quick Sections Panel -->

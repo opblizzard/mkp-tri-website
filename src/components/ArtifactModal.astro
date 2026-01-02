@@ -1,0 +1,27 @@
+---
+// No props for now; static modal for demo
+---
+<button data-modal-target="artifact-modal" data-modal-toggle="artifact-modal" class="bg-cyan-600 px-4 py-2 rounded hover:bg-cyan-500">Inspect Artifact</button>
+
+<div id="artifact-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+  <div class="relative p-4 w-full max-w-2xl max-h-full">
+    <div class="relative bg-black/50 backdrop-blur-lg rounded-lg shadow border border-white/10">
+      <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-white/10">
+        <h3 class="text-xl font-semibold text-white">Artifact Details</h3>
+        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="artifact-modal">
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>
+      <div class="p-4 md:p-5 space-y-4">
+        <p class="text-base leading-relaxed text-gray-300">Hash: abc123 | Cycle: Gamma | Generated via Omni Engine.</p>
+        <!-- Omni LLM Output Here -->
+      </div>
+      <div class="flex items-center p-4 md:p-5 border-t border-white/10 rounded-b">
+        <button data-modal-hide="artifact-modal" type="button" class="text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Generate New</button>
+      </div>
+    </div>
+  </div>
+</div>
