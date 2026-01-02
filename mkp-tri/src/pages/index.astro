@@ -1,0 +1,60 @@
+---
+import CathedralLayout from '../layouts/CathedralLayout.astro';
+import TrifectaHUD from '../components/HUD/TrifectaHUD.astro';
+import GenesisSignal from '../components/Panels/GenesisSignal.astro';
+import CycleClock from '../components/Panels/CycleClock.astro';
+import OmniStatusPanel from '../components/Panels/OmniStatusPanel.astro';
+import CyborgCard from '../components/CyborgCard.astro';
+import FibonacciSpiral from '../components/FibonacciSpiral.astro';
+import cycles from '../data/cycles.json';
+import { getPrimeArtifacts } from '../omni/Codex';
+import { getUnifiedState } from '../omni/UnifiedContext';
+
+const heroArtifacts = getPrimeArtifacts();
+const omni = Astro.locals.omni;
+const unified = getUnifiedState(omni);
+---
+
+
+<CathedralLayout title="MKP TRI - Genesis Dashboard">
+  <section class="fibonacci-section flex flex-col gap-[var(--fib-5)]">
+    <div class="glass-panel border-glow flex flex-col gap-[var(--fib-4)] px-[var(--fib-5)] py-[var(--fib-6)] text-white">
+      <p class="fibonacci-header text-xs uppercase tracking-[0.5em]">Cybernetic Elegance – Fibonacci Schematics</p>
+      <h1 class="gradient-text text-5xl font-semibold leading-tight">
+        Sovereign design, omni-coherent storycraft.
+      </h1>
+      <p class="max-w-2xl text-lg text-white/80">
+        MKP TRI binds architecture, ritual, and mythology into a living codex. Omni Engine modules steward provenance, Fibonacci pacing, and Genesis access protocols.
+      </p>
+      <div class="flex flex-wrap gap-[var(--fib-2)] text-xs uppercase tracking-[0.35em] text-white/60">
+        <span>Cycle <CycleClock timestamp={cycles?.current ?? new Date().toISOString()} /></span>
+        <span class="mkp-divider w-16" aria-hidden="true"></span>
+        <span>{unified.signal.node ?? 'CAT-01'}</span>
+        <span class="mkp-divider w-16" aria-hidden="true"></span>
+        <span>{unified.signal.stamp ?? new Date().toISOString()}</span>
+      </div>
+      <div class="mt-[var(--fib-2)] flex gap-4">
+        <span class="px-3 py-1 rounded bg-green-700/80 text-white font-bold">Genesis: {unified.keyValid ? 'Validated' : 'Pending'}</span>
+        <span class="px-3 py-1 rounded bg-purple-600/80 text-gold-200 font-bold">Omni: {unified.omni.status ?? 'Standby'}</span>
+        <span class="px-3 py-1 rounded bg-blue-600/80 text-white font-bold">Codex: {unified.codex.length} entries</span>
+      </div>
+    </div>
+
+    <TrifectaHUD signature={unified.signal} cycle={unified.cycle} keyValid={unified.keyValid} />
+    <GenesisSignal genesis={unified.genesis} />
+    <OmniStatusPanel omni={unified.omni} />
+
+    <div class="fibonacci-grid grid gap-[var(--fib-3)] md:grid-cols-2">
+      {heroArtifacts.map((artifact, index) => (
+        <CyborgCard
+          title={artifact.title}
+          subtitle={`Artifact ${artifact.id}`}
+          description={artifact.summary}
+          glyph={["TRI", "DELTA", "PHI"][index % 3]}
+        />
+      ))}
+    </div>
+
+    <FibonacciSpiral />
+  </section>
+</CathedralLayout>

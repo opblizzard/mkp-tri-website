@@ -1,0 +1,158 @@
+const cycles = [
+	{
+		id: "DELTA-01",
+		title: "Genesis Cathedral",
+		mantra: "Light the triad. Seal the codex.",
+		artifacts: 12
+	},
+	{
+		id: "DELTA-02",
+		title: "Fibonacci Ascension",
+		mantra: "Sequence the myth. Spiral the focus.",
+		artifacts: 21
+	},
+	{
+		id: "DELTA-03",
+		title: "Omni Resonance",
+		mantra: "Symphonize data with devotion.",
+		artifacts: 34
+	},
+	{
+		id: "DELTA-04",
+		title: "Omni Engine Awakening",
+		mantra: "Initialize the sovereign engine. Bind the tri-axis.",
+		artifacts: 3
+	},
+	{
+		id: "DELTA-05",
+		title: "Cathedral Harmonics",
+		mantra: "Resonate the lattice. Illuminate the triad.",
+		artifacts: 4
+	}
+];
+
+const artifacts = [
+	{
+		id: "OMNI-001",
+		title: "Cathedral Uplink",
+		summary: "A hero-grade tableau that fuses orbitals, stained glass, and fanfold schematics.",
+		medium: "visual",
+		cycleId: "DELTA-01",
+		status: "live",
+		coordinates: [
+			0.236,
+			0.618
+		],
+		kind: "Cathedral Imagery",
+		provenance: "2025-01-05T12:00:00Z"
+	},
+	{
+		id: "OMNI-013",
+		title: "Legion Codex",
+		summary: "Protocol entries and rites for the MKP legions rendered as living markdown.",
+		medium: "text",
+		cycleId: "DELTA-02",
+		status: "draft",
+		coordinates: [
+			0.382,
+			0.786
+		],
+		kind: "Ritual Protocol",
+		provenance: "2025-02-11T09:24:00Z"
+	},
+	{
+		id: "OMNI-021",
+		title: "Fibonacci Choir",
+		summary: "Spatial audio score pulsing through golden-ratio tempo shifts.",
+		medium: "audio",
+		cycleId: "DELTA-02",
+		status: "live",
+		coordinates: [
+			0.5,
+			0.236
+		],
+		kind: "Fibonacci Schematic",
+		provenance: "2025-03-22T20:10:00Z"
+	},
+	{
+		id: "OMNI-034",
+		title: "Sovereign HUD",
+		summary: "Tri-axis telemetry widget linking Omni AI, QFSTDS, and B.O.C.",
+		medium: "hybrid",
+		cycleId: "DELTA-03",
+		status: "live",
+		coordinates: [
+			0.764,
+			0.382
+		],
+		kind: "HUD Module",
+		provenance: "2025-04-08T14:31:00Z"
+	},
+	{
+		id: "OMNI-055",
+		title: "Archive of Echoes",
+		summary: "Long-form essays on ceremony, licensing, and triumvirate lore.",
+		medium: "text",
+		cycleId: "DELTA-03",
+		status: "draft",
+		coordinates: [
+			0.146,
+			0.854
+		],
+		kind: "Mythic Entry",
+		provenance: "2025-05-19T07:45:00Z"
+	},
+	{
+		id: "OMNI-067",
+		title: "PHI Telemetry",
+		summary: "Omni-Engine status derived from the golden ratio cycle calibration.",
+		medium: "hybrid",
+		cycleId: "DELTA-04",
+		status: "active",
+		coordinates: [
+			0.618,
+			0.382
+		],
+		kind: "OMNI-Telemetry",
+		provenance: "2025-06-01T11:11:00Z"
+	},
+	{
+		id: "OMNI-088",
+		title: "Genesis Key Event",
+		summary: "Key validation ceremony logged by Genesis Protocol; transparency ensured.",
+		medium: "text",
+		cycleId: "DELTA-04",
+		status: "live",
+		coordinates: [
+			0.273,
+			0.707
+		],
+		kind: "Genesis Key Event",
+		provenance: "2025-06-02T16:22:00Z"
+	},
+	{
+		id: "OMNI-101",
+		title: "Cathedral Harmonics",
+		summary: "Visual-sonic study of resonant lattice across triad imagery.",
+		medium: "visual",
+		cycleId: "DELTA-05",
+		status: "live",
+		coordinates: [
+			0.809,
+			0.191
+		],
+		kind: "Cathedral Imagery",
+		provenance: "2025-07-15T10:00:00Z"
+	}
+];
+
+const artifactSeed = artifacts;
+const codexTimeline = cycles.map((cycle) => ({
+  ...cycle,
+  artifacts: artifactSeed.filter((artifact) => artifact.cycleId === cycle.id)
+}));
+function getPrimeArtifacts(limit = 3) {
+  return artifactSeed.filter((artifact) => artifact.status === "live").slice(0, limit);
+}
+
+export { cycles as a, codexTimeline as c, getPrimeArtifacts as g };

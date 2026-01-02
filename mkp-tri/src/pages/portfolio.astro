@@ -1,0 +1,686 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import portfolioData from "../data/portfolio.json";
+
+// Prepare filters and artifact grid
+const filters = ["cycle", "domain", "ritual type"];
+const sealedSections = [
+  {
+    title: "Omni Engine Modules",
+    summary: "Core systems orchestrating telemetry, rites, and adaptive UI states.",
+    entries: portfolioData.omniEngineModules
+  },
+  {
+    title: "Cathedral Imagery",
+    summary: "Research decks for spatial, stained glass, and orbital motifs.",
+    entries: portfolioData.cathedralImagery
+  },
+  {
+    title: "Technical Architecture",
+    summary: "Automation, provenance, and signal transparency layers.",
+    entries: portfolioData.technicalArchitecture
+  },
+  {
+    title: "Mythic Works",
+    summary: "Long-form narrative systems for ceremony-grade releases.",
+    entries: portfolioData.mythicWorks
+  }
+];
+---
+
+<BaseLayout
+  title="MKP-TRI Portfolio"
+  description="Sealed portfolio access for mkptri.org"
+  className="portfolio-body"
+>
+  <section class="fibonacci-section portfolio-shell">
+    <header class="portfolio-hero">
+      <p class="hero-kicker">MKP-TRI // sealed line</p>
+      <div>
+        <h1 class="fibonacci-header">Genesis Portfolio Gate</h1>
+        <p>
+          Private workstream containing ceremony decks, telemetry stacks, and cathedral studies.
+          Present a valid key to lift the veil.
+        </p>
+      </div>
+      <div class="fibonacci-grid grid gap-[var(--fib-3)] md:grid-cols-2">
+        {sealedSections.map((section) => (
+          <div class="glass-panel border-glow flex flex-col gap-[var(--fib-2)] p-[var(--fib-3)]">
+            <h2 class="text-xl font-semibold">{section.title}</h2>
+            <p class="text-sm text-white/70">{section.summary}</p>
+            <ul>
+              {section.entries.map((entry) => (
+                <li class="artifact-card">
+                  <span class="font-bold">{entry.title}</span> <span class="text-xs">({entry.cycle}, {entry.domain}, {entry.ritualType})</span>
+                  <p>{entry.description}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <div class="portfolio-filters flex gap-[var(--fib-2)] mt-[var(--fib-3)]">
+        {filters.map((filter) => (
+          <button class="filter-btn px-3 py-1 rounded bg-white/10 text-white/80 hover:bg-white/20 transition">{filter}</button>
+        ))}
+      </div>
+    </header>
+    {/* ...existing code... */}
+          <strong>{accessKeys.length.toString().padStart(2, "0")}</strong>
+        </li>
+        <li>
+          <span>Active cycles</span>
+          <strong>04</strong>
+        </li>
+        <li>
+          <span>Artifacts sealed</span>
+          <strong>{sealedSections.reduce((sum, block) => sum + block.entries.length, 0)}</strong>
+        </li>
+      </ul>
+    </header>
+
+    <div id="portfolio-loader" class="portfolio-loader" aria-live="assertive" data-state="idle">
+      <div class="portfolio-loader__inner">
+        <span class="portfolio-loader__spinner" aria-hidden="true"></span>
+        <div>
+          <p class="portfolio-loader__status">Checking portfolio session...</p>
+          <p class="portfolio-loader__hint">You will be redirected after login completes.</p>
+        </div>
+        <button type="button" id="portfolio-login-redirect">Go to login portal</button>
+      </div>
+    </div>
+
+    <div class="portfolio-grid">
+      <section class="clearance-panel" aria-labelledby="clearance-heading">
+        <div class="panel-head">
+          <div>
+            <p class="panel-kicker">Access Control</p>
+            <h2 id="clearance-heading">Submit key signature</h2>
+            <p>Keys are 11 characters. Input is case agnostic.</p>
+          </div>
+          <span class="panel-id">MKP//PORTAL</span>
+        </div>
+        <form id="access-form" class="access-form" autocomplete="off" novalidate>
+          <label for="access-key">Key hash</label>
+          <input
+            id="access-key"
+            type="password"
+            minlength="11"
+            maxlength="11"
+            placeholder="XXXXXXXXXXX"
+            required
+          />
+          <button type="submit">Unlock portfolio</button>
+          <p id="access-message" class="hint">Awaiting secure entry...</p>
+        </form>
+
+        <div class="keys-ledger">
+          <div class="keys-ledger__header">
+            <h3>Key ledger</h3>
+            <span>{accessKeys.length} total</span>
+          </div>
+          <ul>
+            {accessKeys.map((key) => (
+              <li class="keys-ledger__row" data-key={key.code}>
+                <div>
+                  <p class="key-label">{key.label}</p>
+                  <p class="key-code">{key.code.slice(0, 4)}...{key.code.slice(-3)}</p>
+                </div>
+                <span class="key-status">{key.status}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section class="sealed-panel" id="sealed-panel" data-state="sealed" aria-live="polite">
+        <div class="sealed-halo">
+          <p>Portfolio sealed. Provide a valid MKP-TRI key to view artifacts.</p>
+        </div>
+        <div class="sealed-content" aria-hidden="true">
+          {sealedSections.map((section) => (
+            <article class="sealed-block">
+              <header>
+                <p class="block-kicker">{section.title}</p>
+                <h3>{section.summary}</h3>
+              </header>
+              <ul>
+                {section.entries.map((entry) => (
+                  <li>
+                    <strong>{entry.name}</strong>
+                    <p>{entry.summary}</p>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <script type="application/json" id="access-key-data">
+    {JSON.stringify(accessKeys.map((key) => key.code))}
+  </script>
+
+  <script type="module">
+    const ACCESS_CODES = JSON.parse(document.getElementById("access-key-data").textContent || "[]");
+    const SESSION_KEY = "mkpPortfolioSession";
+    const COOKIE_NAME = "portfolio_session";
+
+    const form = document.getElementById("access-form");
+    const input = document.getElementById("access-key");
+    const message = document.getElementById("access-message");
+    const sealedPanel = document.getElementById("sealed-panel");
+    const loader = document.getElementById("portfolio-loader");
+    const loginButton = document.getElementById("portfolio-login-redirect");
+
+    const params = new URLSearchParams(window.location.search);
+
+    function hasSession() {
+      return Boolean(sessionStorage.getItem(SESSION_KEY) || document.cookie.includes(`${COOKIE_NAME}=`));
+    }
+
+    function persistSession(token = "access-granted") {
+      sessionStorage.setItem(SESSION_KEY, token);
+      document.cookie = `${COOKIE_NAME}=${token}; path=/; max-age=86400; SameSite=Lax`;
+    }
+
+    function unlockPortfolio(statusMessage = "Access granted. Portfolio unlocked.") {
+      sealedPanel?.setAttribute("data-state", "open");
+      if (message) {
+        message.textContent = statusMessage;
+        message.style.color = "var(--portfolio-green)";
+      }
+      if (input) input.disabled = true;
+      form?.querySelector("button")?.setAttribute("disabled", "true");
+      loader?.setAttribute("data-state", "hidden");
+    }
+
+    function showLoader() {
+      loader?.setAttribute("data-state", "visible");
+    }
+
+    function redirectToLogin() {
+      const fallback = `/login?redirect=${encodeURIComponent(window.location.pathname)}`;
+      window.location.href = fallback;
+    }
+
+    const sessionParam = params.get("portfolio_session");
+    if (sessionParam) {
+      persistSession(sessionParam);
+      params.delete("portfolio_session");
+      const next = `${window.location.pathname}${params.size ? `?${params.toString()}` : ""}`;
+      window.history.replaceState({}, "", next);
+    }
+
+    if (hasSession()) {
+      unlockPortfolio("Session restored. Portfolio unlocked.");
+    } else {
+      showLoader();
+    }
+
+    loginButton?.addEventListener("click", redirectToLogin);
+
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const attempt = input.value.trim().toUpperCase();
+
+      if (ACCESS_CODES.includes(attempt)) {
+        persistSession(attempt);
+        unlockPortfolio();
+        document.querySelector(`[data-key='${attempt}']`)?.classList.add("keys-ledger__row--active");
+      } else {
+        sealedPanel?.setAttribute("data-state", "sealed");
+        if (message) {
+          message.textContent = "Invalid key. Please verify and try again.";
+          message.style.color = "var(--portfolio-red)";
+        }
+        input?.focus();
+      }
+    });
+  </script>
+
+  <style>
+  @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;500&display=swap");
+
+  :global(body.portfolio-body) {
+    margin: 0;
+    font-family: "Space Grotesk", "Space Mono", sans-serif;
+    background: radial-gradient(circle at 15% 20%, #1d293b, #05060a 55%);
+    color: #f8fafc;
+    min-height: 100vh;
+  }
+
+  :global(body.portfolio-body > main) {
+    padding: clamp(2rem, 3vw, 3.5rem) clamp(1.5rem, 5vw, 4.5rem);
+  }
+
+  :root {
+    --portfolio-surface: rgba(9, 11, 22, 0.85);
+    --portfolio-border: rgba(148, 163, 184, 0.3);
+    --portfolio-green: #3be0a5;
+    --portfolio-red: #fb7185;
+    --portfolio-amber: #fbbf24;
+  }
+
+  .portfolio-shell {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.5rem, 2vw, 2.5rem);
+  }
+
+  .portfolio-hero {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 64, 175, 0.5));
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 2rem;
+    padding: clamp(1.75rem, 3vw, 3rem);
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .hero-kicker {
+    margin: 0;
+    font-family: "Space Mono", monospace;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #93c5fd;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.8rem, 5vw, 3.75rem);
+    line-height: 1.1;
+  }
+
+  .portfolio-hero > div > p {
+    margin: 0.5rem 0 0;
+    max-width: 48ch;
+    color: rgba(248, 250, 252, 0.8);
+  }
+
+  .telemetry-readings {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+
+  .telemetry-readings li {
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    border-radius: 1rem;
+    padding: 1rem 1.25rem;
+    background: rgba(13, 20, 35, 0.8);
+  }
+
+  .telemetry-readings span {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(148, 163, 184, 0.9);
+  }
+
+  .telemetry-readings strong {
+    display: block;
+    font-size: 1.75rem;
+    line-height: 1.2;
+    margin-top: 0.35rem;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: clamp(1.5rem, 2vw, 2.5rem);
+    align-items: start;
+  }
+
+  .portfolio-loader {
+    position: relative;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 1.5rem;
+    background: rgba(2, 6, 23, 0.65);
+    padding: 1.25rem;
+    transition: opacity 0.3s ease;
+  }
+
+  .portfolio-loader[data-state="hidden"] {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .portfolio-loader__inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .portfolio-loader__spinner {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 3px solid rgba(59, 130, 246, 0.3);
+    border-top-color: #3be0a5;
+    animation: spin 1s linear infinite;
+  }
+
+  .portfolio-loader__status {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .portfolio-loader__hint {
+    margin: 0;
+    font-size: 0.85rem;
+    color: rgba(148, 163, 184, 0.9);
+  }
+
+  #portfolio-login-redirect {
+    margin-left: auto;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    border-radius: 999px;
+    padding: 0.6rem 1.2rem;
+    background: transparent;
+    color: #f8fafc;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  #portfolio-login-redirect:hover {
+    border-color: #3be0a5;
+    color: #3be0a5;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .clearance-panel,
+  .sealed-panel {
+    background: var(--portfolio-surface);
+    border: 1px solid var(--portfolio-border);
+    border-radius: 1.75rem;
+    padding: clamp(1.5rem, 2vw, 2.25rem);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .panel-kicker {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.75rem;
+    color: rgba(148, 163, 184, 0.9);
+  }
+
+  .panel-head h2 {
+    margin: 0.25rem 0;
+    font-size: 1.6rem;
+  }
+
+  .panel-id {
+    font-family: "Space Mono", monospace;
+    font-size: 0.85rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    background: rgba(59, 130, 246, 0.15);
+    color: #93c5fd;
+    align-self: flex-start;
+  }
+
+  .access-form {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .access-form label {
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(226, 232, 240, 0.9);
+  }
+
+  .access-form input {
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    border-radius: 0.9rem;
+    padding: 0.95rem 1.1rem;
+    background: rgba(13, 16, 28, 0.9);
+    color: #f8fafc;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .access-form input:focus {
+    outline: 2px solid rgba(59, 130, 246, 0.6);
+    outline-offset: 2px;
+  }
+
+  .access-form button {
+    margin-top: 0.5rem;
+    border: none;
+    border-radius: 0.9rem;
+    padding: 0.95rem 1.1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    color: #05060a;
+    background: linear-gradient(120deg, #3be0a5, #60a5fa);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .access-form button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(59, 130, 246, 0.35);
+  }
+
+  .access-form button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .hint {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(148, 163, 184, 0.9);
+  }
+
+  .keys-ledger {
+    margin-top: 2rem;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 1.25rem;
+    padding: 1rem;
+    background: rgba(12, 18, 31, 0.8);
+  }
+
+  .keys-ledger__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .keys-ledger__header h3 {
+    margin: 0;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #e2e8f0;
+  }
+
+  .keys-ledger__header span {
+    font-size: 0.85rem;
+    color: rgba(148, 163, 184, 0.9);
+  }
+
+  .keys-ledger ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .keys-ledger__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    border-radius: 0.9rem;
+    background: rgba(11, 16, 27, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+
+  .keys-ledger__row--active {
+    border-color: rgba(59, 225, 165, 0.8);
+    background: rgba(6, 49, 33, 0.8);
+  }
+
+  .key-label {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .key-code {
+    margin: 0.2rem 0 0;
+    font-family: "Space Mono", monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    color: rgba(148, 163, 184, 0.9);
+  }
+
+  .key-status {
+    align-self: center;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    padding: 0.35rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+  }
+
+  .sealed-panel {
+    min-height: 100%;
+  }
+
+  .sealed-halo {
+    border: 1px dashed rgba(99, 102, 241, 0.6);
+    border-radius: 1.25rem;
+    padding: 1rem 1.25rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(147, 197, 253, 0.9);
+    margin-bottom: 1.5rem;
+  }
+
+  .sealed-content {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .sealed-block {
+    border: 1px solid rgba(59, 130, 246, 0.18);
+    border-radius: 1.25rem;
+    padding: 1.25rem;
+    background: rgba(10, 12, 24, 0.85);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sealed-block header {
+    margin-bottom: 0.75rem;
+  }
+
+  .block-kicker {
+    margin: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(165, 180, 252, 0.9);
+  }
+
+  .sealed-block h3 {
+    margin: 0.35rem 0 0;
+    font-size: 1.3rem;
+  }
+
+  .sealed-block ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .sealed-block li strong {
+    display: block;
+    font-size: 1rem;
+  }
+
+  .sealed-block li p {
+    margin: 0.2rem 0 0;
+    color: rgba(226, 232, 240, 0.85);
+    line-height: 1.5;
+  }
+
+  #sealed-panel[data-state="sealed"] .sealed-content {
+    filter: blur(14px);
+    pointer-events: none;
+    position: relative;
+  }
+
+  #sealed-panel[data-state="open"] .sealed-content {
+    filter: none;
+  }
+
+  #sealed-panel[data-state="open"] .sealed-halo {
+    border-style: solid;
+    color: var(--portfolio-green);
+  }
+
+  @media (max-width: 720px) {
+    .portfolio-hero {
+      border-radius: 1.5rem;
+    }
+
+    .panel-head {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .keys-ledger__row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .telemetry-readings {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+  }
+  </style>
+</BaseLayout>

@@ -1,0 +1,97 @@
+
+---
+import OperationsLayout from '../layouts/OperationsLayout.astro';
+import { getUnifiedState } from '../omni/UnifiedContext';
+---
+
+<OperationsLayout title="Operations Terminal" description="Live Genesis validation, Omni heartbeat, and Codex event logs.">
+	{(() => { const unified = getUnifiedState(Astro.locals.omni); return null; })()}
+	<section class="fibonacci-section flex flex-col gap-[var(--fib-5)]">
+		<header class="text-center">
+			<h1 class="fibonacci-header gradient-text text-4xl font-semibold">Operations Terminal</h1>
+			<p class="mx-auto mt-3 max-w-2xl text-white/70">Monitor live logs, validate Genesis, and track Omni Engine heartbeat in real time.</p>
+		</header>
+
+		<div class="terminal-ui glass-panel border-glow flex flex-col gap-[var(--fib-3)] p-[var(--fib-4)]">
+			<div class="terminal-header flex items-center justify-between mb-[var(--fib-2)]">
+				<span class="font-mono text-xs text-white/60">Genesis Validation</span>
+				<span class="omni-heartbeat px-3 py-1 rounded bg-purple-600/80 text-gold-200 font-bold animate-pulse">Omni Heartbeat</span>
+			</div>
+			<div id="terminal-logs" class="terminal-logs bg-black/80 rounded-lg p-[var(--fib-2)] h-64 overflow-y-auto text-xs font-mono text-green-400 border border-white/10">
+				<!-- Live logs will appear here -->
+			</div>
+			<div class="codex-log mt-[var(--fib-2)] p-[var(--fib-2)] bg-white/5 rounded-lg border border-white/10">
+				<h3 class="text-base font-semibold text-white">Codex Event Log</h3>
+				<ul id="codex-events" class="text-xs text-white/70"></ul>
+			</div>
+			<form id="terminal-form" class="terminal-input flex gap-2 mt-[var(--fib-2)]">
+				<input type="text" id="terminal-command" class="flex-1 px-3 py-2 rounded bg-white/10 text-white/80 border border-white/20" placeholder="Enter command..." autocomplete="off" />
+				<button type="submit" class="px-4 py-2 rounded bg-purple-600 text-white font-bold hover:bg-purple-700 transition">Send</button>
+			</form>
+			<div class="genesis-validation mt-[var(--fib-2)]">
+				<button id="validate-genesis" class="px-4 py-2 rounded bg-gold-200 text-purple-900 font-bold hover:bg-gold-300 transition">Validate Genesis</button>
+				<span id="genesis-status" class="ml-4 text-xs text-white/80">Awaiting validation...</span>
+			</div>
+		</div>
+		<script>
+			// Demo: Simulate live logs
+			const logs = [
+				'[Cycle 001] Genesis signal received.',
+				'[Cycle 002] Omni Engine heartbeat: OK.',
+				'[Cycle 003] Codex update: Artifact added.',
+				'[Cycle 004] Worker deployed: genesisUpdater.js',
+				'[Cycle 005] Genesis validation: pending...',
+			];
+			const logEl = document.getElementById('terminal-logs');
+			let logIdx = 0;
+			function addLog(msg) {
+				const div = document.createElement('div');
+				div.textContent = msg;
+				logEl.appendChild(div);
+				logEl.scrollTop = logEl.scrollHeight;
+			}
+			setInterval(() => {
+				if (logIdx < logs.length) {
+					addLog(logs[logIdx++]);
+				}
+			}, 1200);
+
+			// Command input
+			document.getElementById('terminal-form').addEventListener('submit', (e) => {
+				e.preventDefault();
+				const cmd = document.getElementById('terminal-command').value;
+				if (cmd) {
+					addLog('> ' + cmd);
+					logCodexEvent('Terminal command: ' + cmd);
+					document.getElementById('terminal-command').value = '';
+					// Simulate Omni LLM input flow
+					if (cmd.toLowerCase().includes('omni')) {
+						addLog('[Omni LLM] Processing input...');
+						setTimeout(() => {
+							addLog('[Omni LLM] Response: Codex entry updated.');
+							logCodexEvent('Omni LLM updated Codex entry.');
+						}, 1500);
+					}
+				}
+			});
+
+			function logCodexEvent(msg) {
+				const ul = document.getElementById('codex-events');
+				const li = document.createElement('li');
+				li.textContent = msg;
+				ul.appendChild(li);
+			}
+
+			// Genesis validation workflow
+			document.getElementById('validate-genesis').addEventListener('click', () => {
+				addLog('[Genesis] Validation started...');
+				logCodexEvent('Genesis validation workflow started.');
+				setTimeout(() => {
+					document.getElementById('genesis-status').textContent = 'Genesis validated ✔';
+					addLog('[Genesis] Validation complete.');
+					logCodexEvent('Genesis validated and Codex updated.');
+				}, 2000);
+			});
+		</script>
+	</section>
+</OperationsLayout>

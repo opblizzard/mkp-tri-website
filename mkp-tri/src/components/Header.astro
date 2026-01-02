@@ -1,0 +1,39 @@
+---
+import { SITE_TITLE } from '../consts';
+
+const pathname = Astro.url.pathname;
+const omni = Astro.locals.omni;
+const navLinks = [
+  { href: '/', label: 'Genesis' },
+  { href: '/portfolio', label: 'Portfolio' },
+  { href: '/codex', label: 'Codex' },
+];
+---
+
+<header class="glass-panel border-glow sticky top-4 z-20 mx-auto mt-6 flex w-[min(1100px,95%)] flex-wrap items-center justify-between gap-4 px-6 py-4">
+  <a href="/" class="flex flex-col font-techno text-xs uppercase tracking-[0.4em] text-cyberwhite">
+    <span>{SITE_TITLE}</span>
+    <span class="text-[0.65em] font-mono tracking-[0.6em] text-mkblue">Omni Engine</span>
+  </a>
+
+  <nav class="flex flex-wrap items-center gap-6">
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class={`text-[0.7rem] uppercase tracking-[0.45em] transition-all ${pathname === link.href ? 'text-neonblue' : 'text-cyberwhite/70 hover:text-cyberwhite'}`}
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+
+  <div class="hidden items-center gap-2 rounded-full border border-white/15 px-4 py-1 text-[0.6rem] uppercase tracking-[0.35em] text-white/70 md:flex">
+    <span>{omni?.signature.node ?? 'CAT-01'}</span>
+    <span class="mkp-divider w-10" aria-hidden="true" />
+    <span>{omni?.cycle ?? 'PHI-000'}</span>
+    <span class="mkp-divider w-10" aria-hidden="true" />
+    <span class={omni?.keyValid ? 'text-aurora' : 'text-brass'}>
+      {omni?.keyValid ? 'Key Validated' : 'Key Pending'}
+    </span>
+  </div>
+</header>

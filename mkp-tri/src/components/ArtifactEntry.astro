@@ -1,0 +1,25 @@
+---
+import type { Artifact } from '../omni/Codex';
+
+interface Props {
+  artifact: Artifact;
+}
+
+const { artifact } = Astro.props;
+---
+
+<article class="glass-panel border-glow flex flex-col gap-4 p-6">
+  <div class="flex items-center justify-between">
+    <p class="text-xs font-mono uppercase tracking-[0.45em] text-white/50">{artifact.id}</p>
+    <span class={artifact.status === 'live' ? 'text-aurora text-xs uppercase tracking-[0.45em]' : 'text-brass text-xs uppercase tracking-[0.45em]'}>
+      {artifact.status}
+    </span>
+  </div>
+  <h3 class="text-2xl font-semibold gradient-text">{artifact.title}</h3>
+  <p class="text-sm text-white/70">{artifact.summary}</p>
+  <div class="flex flex-wrap items-center gap-4 text-xs uppercase tracking-[0.35em] text-white/50">
+    <span>{artifact.medium}</span>
+    <span class="mkp-divider w-12" aria-hidden="true"></span>
+    <span>Cycle {artifact.cycleId}</span>
+  </div>
+</article>

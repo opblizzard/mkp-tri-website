@@ -1,0 +1,23 @@
+/* Fibonacci UI System: spacing, grid, golden-ratio typography */
+:root {
+  --fib-1: 8px;
+  --fib-2: 13px;
+  --fib-3: 21px;
+  --fib-4: 34px;
+  --fib-5: 55px;
+  --fib-6: 89px;
+  --golden-ratio: 1.618;
+  --palette-purple: #7c3aed;
+  --palette-gold: #ffd700;
+}
+.fibonacci-grid {
+  display: grid;
+  grid-gap: var(--fib-3);
+}
+.fibonacci-header {
+  font-size: calc(1rem * var(--golden-ratio));
+  color: var(--palette-gold);
+}
+.fibonacci-section {
+  margin-bottom: var(--fib-5);
+}

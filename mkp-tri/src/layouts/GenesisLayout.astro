@@ -1,0 +1,16 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'Genesis Portfolio - MKP TRI', description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} className="bg-cathedral min-h-screen">
+  <section class="flex flex-col gap-8">
+    <slot />
+  </section>
+</BaseLayout>

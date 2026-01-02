@@ -1,0 +1,43 @@
+---
+interface Props {
+  signature: {
+    node: string;
+    stamp: string;
+  };
+  cycle: string;
+  keyValid: boolean;
+}
+
+const { signature, cycle, keyValid } = Astro.props;
+const points = [
+  { label: 'Omni AI', value: keyValid ? 'Awake' : 'Standby' },
+  { label: 'QFSTDS', value: cycle },
+  { label: 'B.O.C.', value: signature.node },
+];
+---
+
+<section class="glass-panel border-glow hud-grid flex flex-col gap-6 px-6 py-6 text-white">
+  <header class="flex flex-wrap items-center justify-between gap-4">
+    <div>
+      <p class="text-xs uppercase tracking-[0.45em] text-white/70">Trifecta HUD</p>
+      <h2 class="gradient-text text-3xl font-semibold">Genesis Signal</h2>
+    </div>
+    <div class={`rounded-full border px-4 py-1 text-xs uppercase tracking-[0.35em] ${keyValid ? 'border-aurora text-aurora' : 'border-brass text-brass'}`}>
+      {keyValid ? 'Key Validated' : 'Key Pending'}
+    </div>
+  </header>
+
+  <div class="grid gap-4 md:grid-cols-3">
+    {points.map((point) => (
+      <article class="flex flex-col gap-1 rounded-xl border border-white/10 bg-white/5 p-4 text-center">
+        <p class="text-[0.65rem] uppercase tracking-[0.35em] text-white/60">{point.label}</p>
+        <p class="text-lg font-semibold">{point.value}</p>
+      </article>
+    ))}
+  </div>
+
+  <div class="flex flex-wrap items-center justify-between gap-4 text-xs font-mono uppercase tracking-[0.35em] text-white/60">
+    <span>Cycle {cycle}</span>
+    <span>{signature.stamp}</span>
+  </div>
+</section>

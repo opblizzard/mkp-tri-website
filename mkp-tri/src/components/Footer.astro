@@ -1,0 +1,12 @@
+---
+import { SITE_TITLE } from '../consts';
+const omni = Astro.locals.omni;
+---
+
+<footer class="mx-auto w-[min(1100px,95%)] py-10 text-xs uppercase tracking-[0.35em] text-white/50">
+  <div class="mkp-divider mb-6" aria-hidden="true"></div>
+  <div class="flex flex-wrap items-center justify-between gap-4">
+    <span>{SITE_TITLE} - {new Date().getFullYear()}</span>
+    <span>Cycle {omni?.cycle ?? 'PHI-000'} | {omni?.signature.node ?? 'CAT-01'}</span>
+  </div>
+</footer>

@@ -1,0 +1,106 @@
+---
+import CodexLayout from "../layouts/CodexLayout.astro";
+import { CodexEngine } from "../codex/engine";
+import OmniLLMChat from "../components/Omni/OmniLLMChat.astro";
+
+const highlights = CodexEngine.list().slice(0, 3);
+const omniEndpoint = import.meta.env.PUBLIC_OMNI_ENDPOINT ?? "/api/omni";
+---
+
+<CodexLayout title="Omni Operations" description="LLM control room wired into the Codex and Genesis protocols.">
+  <section class="fibonacci-section flex flex-col gap-[var(--fib-5)]">
+    <header class="text-center">
+      <p class="fibonacci-header text-xs uppercase tracking-[0.45em]">Omni Operator</p>
+      <h1 class="gradient-text text-4xl font-semibold">Mission Console</h1>
+      <p class="mx-auto mt-3 max-w-3xl text-white/70">
+        Issue directives to Omni. Every response is contextualized by live Codex data and recorded for provenance. Use the chat pane to brief operations, request codex writes, or pull status reports.
+      </p>
+      <div class="mx-auto mt-6 fibonacci-grid grid w-full max-w-4xl gap-[var(--fib-3)] rounded-2xl border border-white/15 bg-black/30 p-5 text-left md:grid-cols-3">
+        {highlights.map((entry) => (
+          <div>
+            <p class="text-xs uppercase tracking-[0.35em] text-white/50">{entry.sector}</p>
+            <p class="text-lg font-semibold text-white">{entry.title}</p>
+            <p class="text-xs text-white/60">Updated {new Date(entry.updatedAt).toLocaleDateString()}</p>
+          </div>
+        ))}
+      </div>
+      <div class="omni-status-badge mt-[var(--fib-2)]">
+        <span class="px-4 py-2 rounded bg-purple-600/80 text-gold-200 font-bold">Cycle PHI-091 COD-02</span>
+      </div>
+    </header>
+
+    <div class="fibonacci-grid grid gap-[var(--fib-3)] lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+      <section class="glass-panel border-glow flex flex-col overflow-hidden">
+        <header class="border-b border-white/10 px-6 py-4">
+          <p class="text-xs uppercase tracking-[0.4em] text-white/60">Chat Thread</p>
+          <p class="text-white/80">Endpoint: {omniEndpoint}</p>
+        </header>
+        <OmniLLMChat />
+      </section>
+
+      <aside class="glass-panel border-glow flex flex-col gap-[var(--fib-2)] p-[var(--fib-3)]">
+        <h2 class="text-lg font-semibold text-white">Codex Briefing</h2>
+        <ul class="space-y-3 text-sm text-white/70">
+          {highlights.map((entry) => (
+            <li class="rounded-xl border border-white/10 p-3">
+              <p class="text-xs uppercase tracking-[0.3em] text-white/50">{entry.sector}</p>
+              <p class="text-base font-semibold text-white">{entry.title}</p>
+              <p class="text-xs text-white/60">{entry.synopsis}</p>
+            </li>
+          ))}
+        </ul>
+        <div class="rounded-xl border border-white/15 bg-white/5 p-4 text-xs text-white/70">
+          <p class="font-semibold text-white">Usage</p>
+          <ol class="mt-2 list-decimal space-y-1 pl-4">
+            <li>Compose directive.</li>
+            <li>Send to Omni worker.</li>
+            <li>Monitor Codex for resulting entry.</li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+
+    <script>
+      const omniForm = document.getElementById('omni-form');
+      const omniInput = document.getElementById('omni-input');
+      const messagePane = document.getElementById('omni-messages');
+      const endpoint = import.meta.env.PUBLIC_OMNI_ENDPOINT ?? '/api/omni';
+      const chatUrl = `${endpoint.replace(/\/$/, '')}/chat`;
+
+      function pushMessage(role, content) {
+        const bubble = document.createElement('div');
+        bubble.className = role === 'user'
+          ? 'ml-auto max-w-xl rounded-2xl border border-white/20 bg-white/10 p-4 text-sm text-white'
+          : 'max-w-xl rounded-2xl border border-white/10 bg-black/30 p-4 text-sm text-white/80';
+        bubble.textContent = content;
+        messagePane?.appendChild(bubble);
+        messagePane?.scrollTo({ top: messagePane.scrollHeight, behavior: 'smooth' });
+      }
+
+      omniForm?.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!omniInput || !messagePane) return;
+
+        const content = omniInput.value.trim();
+        if (!content) return;
+        pushMessage('user', content);
+        omniInput.value = '';
+
+        const payload = { messages: [{ role: 'user', content }] };
+        try {
+          const res = await fetch(chatUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const data = await res.json();
+          const reply = data?.response?.result?.trim?.() ?? JSON.stringify(data.response ?? data);
+          pushMessage('assistant', reply);
+        } catch (err) {
+          console.error('Omni chat failed', err);
+          pushMessage('assistant', 'Transmission failed. Check worker logs.');
+        }
+      });
+    </script>
+  </section>
+</CodexLayout>

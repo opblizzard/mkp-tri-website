@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>MKP TRI Codex</title>
+  <updated>2025-12-29T14:26:59.496Z</updated>
+  <entry>
+    <id>OMNI-001</id>
+    <title>Cathedral Uplink</title>
+    <summary>A hero-grade tableau that fuses orbitals, stained glass, and fanfold schematics.</summary>
+    <category term="DELTA-01"/>
+    <updated>2025-01-05T12:00:00Z</updated>
+  </entry>
+  <entry>
+    <id>OMNI-013</id>
+    <title>Legion Codex</title>
+    <summary>Protocol entries and rites for the MKP legions rendered as living markdown.</summary>
+    <category term="DELTA-02"/>
+    <updated>2025-02-11T09:24:00Z</updated>
+  </entry>
+  <entry>
+    <id>OMNI-021</id>
+    <title>Fibonacci Choir</title>
+    <summary>Spatial audio score pulsing through golden-ratio tempo shifts.</summary>
+    <category term="DELTA-02"/>
+    <updated>2025-03-22T20:10:00Z</updated>
+  </entry>
+  <entry>
+    <id>OMNI-034</id>
+    <title>Sovereign HUD</title>
+    <summary>Tri-axis telemetry widget linking Omni AI, QFSTDS, and B.O.C.</summary>
+    <category term="DELTA-03"/>
+    <updated>2025-04-08T14:31:00Z</updated>
+  </entry>
+  <entry>
+    <id>OMNI-055</id>
+    <title>Archive of Echoes</title>
+    <summary>Long-form essays on ceremony, licensing, and triumvirate lore.</summary>
+    <category term="DELTA-03"/>
+    <updated>2025-05-19T07:45:00Z</updated>
+  </entry>
+  <entry>
+    <id>OMNI-067</id>
+    <title>PHI Telemetry</title>
+    <summary>Omni-Engine status derived from the golden ratio cycle calibration.</summary>
+    <category term="DELTA-04"/>
+    <updated>2025-06-01T11:11:00Z</updated>
+  </entry>
+  <entry>
+    <id>OMNI-088</id>
+    <title>Genesis Key Event</title>
+    <summary>Key validation ceremony logged by Genesis Protocol; transparency ensured.</summary>
+    <category term="DELTA-04"/>
+    <updated>2025-06-02T16:22:00Z</updated>
+  </entry>
+  <entry>
+    <id>OMNI-101</id>
+    <title>Cathedral Harmonics</title>
+    <summary>Visual-sonic study of resonant lattice across triad imagery.</summary>
+    <category term="DELTA-05"/>
+    <updated>2025-07-15T10:00:00Z</updated>
+  </entry>
+</feed>

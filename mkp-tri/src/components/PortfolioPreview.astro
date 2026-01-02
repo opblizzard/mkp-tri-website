@@ -1,0 +1,437 @@
+---
+import portfolioData from "../data/portfolio.json";
+
+type PortfolioEntry = {
+    name: string;
+    summary: string;
+    status?: string;
+    link?: string;
+};
+
+type PortfolioSection = {
+    id: string;
+    title: string;
+    accent: string;
+    entries: PortfolioEntry[];
+};
+
+type Stat = {
+    label: string;
+    value: string;
+};
+
+type CTA = {
+    label: string;
+    href: string;
+    external?: boolean;
+};
+
+export interface Props {
+    title?: string;
+    description?: string;
+    sections?: PortfolioSection[];
+    stats?: Stat[];
+    cta?: CTA;
+    lastUpdated?: string;
+}
+
+const defaultSections: PortfolioSection[] = [
+    {
+        id: "omni",
+        title: "Omni Engine Modules",
+        accent: "linear-gradient(135deg, #5f1de5, #b142ff)",
+        entries: portfolioData.omniEngineModules,
+    },
+    {
+        id: "imagery",
+        title: "Cathedral Imagery",
+        accent: "linear-gradient(135deg, #ff5f8d, #ffcf53)",
+        entries: portfolioData.cathedralImagery,
+    },
+    {
+        id: "architecture",
+        title: "Technical Architecture",
+        accent: "linear-gradient(135deg, #2dd0ff, #1f78ff)",
+        entries: portfolioData.technicalArchitecture,
+    },
+    {
+        id: "mythic",
+        title: "Mythic Works",
+        accent: "linear-gradient(135deg, #ff8a1f, #ff3d71)",
+        entries: portfolioData.mythicWorks,
+    },
+];
+
+const {
+    title = "Operations Portfolio",
+    description = "Current telemetry across Omni systems, cathedral studies, and myth cycles.",
+    sections = defaultSections,
+    stats = [],
+    cta = {
+        label: "Open Portfolio Codex",
+        href: "/portfolio",
+    },
+    lastUpdated = "Dec 22, 2025",
+} = Astro.props;
+
+const totalEntries = sections.reduce((count, section) => count + section.entries.length, 0);
+const resolvedStats =
+    stats.length > 0
+        ? stats
+        : [
+              { label: "Active Artifacts", value: totalEntries.toString().padStart(2, "0") },
+              { label: "Systems Online", value: sections.filter((section) => section.entries.length > 0).length.toString() },
+              { label: "Codex Sync", value: lastUpdated },
+          ];
+---
+
+<section class="portfolio-preview" aria-labelledby="portfolio-preview-heading">
+    <header class="portfolio-preview__header">
+        <div>
+            <p class="portfolio-preview__eyebrow">Codex Snapshot</p>
+            <h2 id="portfolio-preview-heading">{title}</h2>
+            <p class="portfolio-preview__description">{description}</p>
+        </div>
+
+        <div class="portfolio-preview__meta">
+            <dl class="portfolio-preview__stats">
+                {resolvedStats.map((stat) => (
+                    <div>
+                        <dt>{stat.label}</dt>
+                        <dd>{stat.value}</dd>
+                    </div>
+                ))}
+            </dl>
+
+            {cta && (
+                <a class="portfolio-preview__cta" href={cta.href} target={cta.external ? "_blank" : undefined} rel={cta.external ? "noreferrer" : undefined}>
+                    {cta.label}
+                    <span aria-hidden="true">&rarr;</span>
+                </a>
+            )}
+        </div>
+    </header>
+
+    <div class="portfolio-preview__canvas">
+        {sections.map((section) => (
+            <article class="portfolio-section" data-accent={section.id}>
+                <header class="portfolio-section__header">
+                    <span class="portfolio-section__halo" style={{ backgroundImage: section.accent }} aria-hidden="true"></span>
+                    <div>
+                        <p class="portfolio-section__eyebrow">Sector</p>
+                        <h3>{section.title}</h3>
+                    </div>
+                    <span class="portfolio-section__count">{section.entries.length.toString().padStart(2, "0")}</span>
+                </header>
+
+                <ul class="portfolio-section__entries">
+                    {section.entries.map((entry, index) => (
+                        <li class="portfolio-entry">
+                            <div class="portfolio-entry__body">
+                                <span class="portfolio-entry__index">{(index + 1).toString().padStart(2, "0")}</span>
+                                <div>
+                                    <h4>{entry.name}</h4>
+                                    <p>{entry.summary}</p>
+                                </div>
+                            </div>
+
+                            {entry.link && (
+                                <a class="portfolio-entry__link" href={entry.link} target="_blank" rel="noreferrer">
+                                    Launch
+                                </a>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+            </article>
+        ))}
+    </div>
+    <footer class="portfolio-preview__footer">
+        <span class="portfolio-preview__signal"></span>
+        <p>Live feed synchronized {lastUpdated}. Genesis maintains lineage for every artifact.</p>
+    </footer>
+</section>
+
+<style>
+    :root {
+        --portfolio-surface: rgba(13, 7, 26, 0.65);
+        --portfolio-stroke: rgba(255, 255, 255, 0.15);
+        --portfolio-text: #f8f7ff;
+        --portfolio-muted: rgba(248, 247, 255, 0.7);
+    }
+
+    .portfolio-preview {
+        position: relative;
+        display: grid;
+        gap: 2.5rem;
+        padding: clamp(1.5rem, 2vw, 2.75rem);
+        border-radius: 1.75rem;
+        background: radial-gradient(circle at 10% 20%, rgba(95, 29, 229, 0.3), transparent 55%),
+            radial-gradient(circle at 80% 0, rgba(255, 175, 87, 0.35), transparent 60%),
+            var(--portfolio-surface);
+        border: 1px solid var(--portfolio-stroke);
+        color: var(--portfolio-text);
+        overflow: hidden;
+        backdrop-filter: blur(18px);
+        font-family: "PP Neue Montreal", "Space Grotesk", "Sora", sans-serif;
+    }
+
+    .portfolio-preview::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        pointer-events: none;
+        mix-blend-mode: screen;
+    }
+
+    .portfolio-preview__header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+
+    .portfolio-preview__eyebrow {
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.2em;
+        color: var(--portfolio-muted);
+        margin-bottom: 0.5rem;
+    }
+
+    .portfolio-preview__header h2 {
+        margin: 0;
+        font-size: clamp(2rem, 3.5vw, 3rem);
+    }
+
+    .portfolio-preview__description {
+        margin: 0.7rem 0 0;
+        max-width: 42ch;
+        color: var(--portfolio-muted);
+        line-height: 1.5;
+    }
+
+    .portfolio-preview__meta {
+        display: grid;
+        gap: 1rem;
+        align-items: flex-end;
+    }
+
+    .portfolio-preview__stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 0.75rem;
+        margin: 0;
+    }
+
+    .portfolio-preview__stats div {
+        padding: 0.9rem 1rem;
+        border: 1px solid var(--portfolio-stroke);
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.04);
+    }
+
+    .portfolio-preview__stats dt {
+        margin: 0;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--portfolio-muted);
+    }
+
+    .portfolio-preview__stats dd {
+        margin: 0.35rem 0 0;
+        font-size: 1.4rem;
+        font-weight: 500;
+    }
+
+    .portfolio-preview__cta {
+        justify-self: end;
+        padding: 0.85rem 1.5rem;
+        border-radius: 999px;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: var(--portfolio-text);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .portfolio-preview__cta:hover,
+    .portfolio-preview__cta:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .portfolio-preview__canvas {
+        display: grid;
+        gap: 1.25rem;
+    }
+
+    .portfolio-section {
+        padding: 1.5rem;
+        border-radius: 1.5rem;
+        border: 1px solid var(--portfolio-stroke);
+        background: rgba(6, 5, 15, 0.65);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    .portfolio-section__header {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .portfolio-section__halo {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        opacity: 0.9;
+        background-size: 150% 150%;
+        animation: orbit 6s linear infinite;
+    }
+
+    .portfolio-section__eyebrow {
+        margin: 0;
+        text-transform: uppercase;
+        color: var(--portfolio-muted);
+        letter-spacing: 0.2em;
+        font-size: 0.7rem;
+    }
+
+    .portfolio-section__header h3 {
+        margin: 0.2rem 0 0;
+        font-size: 1.4rem;
+    }
+
+    .portfolio-section__count {
+        font-size: 1.05rem;
+        letter-spacing: 0.3em;
+        color: var(--portfolio-muted);
+    }
+
+    .portfolio-section__entries {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.9rem;
+    }
+
+    .portfolio-entry {
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 1rem;
+        padding: 0.9rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    .portfolio-entry__body {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.85rem;
+    }
+
+    .portfolio-entry__index {
+        font-size: 0.85rem;
+        letter-spacing: 0.15em;
+        color: var(--portfolio-muted);
+        margin-top: 0.15rem;
+    }
+
+    .portfolio-entry h4 {
+        margin: 0;
+        font-size: 1.1rem;
+    }
+
+    .portfolio-entry p {
+        margin: 0.2rem 0 0;
+        color: var(--portfolio-muted);
+        line-height: 1.45;
+    }
+
+    .portfolio-entry__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.85rem;
+        text-decoration: none;
+        color: var(--portfolio-text);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 999px;
+        padding: 0.35rem 0.85rem;
+        transition: background 0.2s ease;
+    }
+
+    .portfolio-entry__link:hover,
+    .portfolio-entry__link:focus-visible {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .portfolio-preview__footer {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: var(--portfolio-muted);
+        font-size: 0.9rem;
+    }
+
+    .portfolio-preview__signal {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #49ffb1, #1bff85);
+        position: relative;
+        animation: ping 2.2s infinite;
+    }
+
+    @keyframes ping {
+        0% {
+            box-shadow: 0 0 0 0 rgba(73, 255, 177, 0.5);
+        }
+        100% {
+            box-shadow: 0 0 0 22px rgba(73, 255, 177, 0);
+        }
+    }
+
+    @keyframes orbit {
+        0% {
+            background-position: 0% 50%;
+        }
+        100% {
+            background-position: 100% 50%;
+        }
+    }
+
+    @media (min-width: 840px) {
+        .portfolio-preview__canvas {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 640px) {
+        .portfolio-preview {
+            padding: 1.25rem;
+        }
+
+        .portfolio-preview__header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .portfolio-preview__cta {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>

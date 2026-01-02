@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  description: string;
+  glyph?: string;
+}
+
+const { title, subtitle, description, glyph = 'TRI' } = Astro.props;
+---
+
+<article class="glass-panel border-glow flex flex-col gap-4 px-6 py-6">
+  <div class="flex items-center gap-3">
+    <span class="text-3xl text-neonblue">{glyph}</span>
+    <div>
+      <p class="text-xs uppercase tracking-[0.45em] text-white/60">{subtitle}</p>
+      <h3 class="text-xl font-semibold">{title}</h3>
+    </div>
+  </div>
+  <p class="text-sm text-white/70">{description}</p>
+</article>

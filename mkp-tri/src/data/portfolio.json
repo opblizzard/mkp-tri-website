@@ -1,0 +1,22 @@
+{
+  "omniEngineModules": [
+    { "name": "QFSTDS", "summary": "Fibonacci-tempo sequencing + reveal scheduling." },
+    { "name": "B.O.C.", "summary": "Binding of Ceremony — keys, rites, and seals." },
+    { "name": "Omni AI", "summary": "Myth-aware, telemetry-driven design assistance." },
+    { "name": "Sovereign HUD", "summary": "Tri-axis telemetry (Omni AI, QFSTDS, B.O.C.)." }
+  ],
+  "cathedralImagery": [
+    { "name": "Pink-Purple Study", "summary": "Ongoing series across cathedral motifs." },
+    { "name": "Cathedral Uplink", "summary": "Orbitals + stained glass + fanfold schematics." },
+    { "name": "Fibonacci Choir", "summary": "Golden-ratio tempo visual-sonic study." }
+  ],
+  "technicalArchitecture": [
+    { "name": "Cloudflare CI/CD", "summary": "Pages build + Workers automation." },
+    { "name": "Transparency Panels", "summary": "Worker logs + public feeds." },
+    { "name": "Artifact Provenance", "summary": "Append-only event registry." }
+  ],
+  "mythicWorks": [
+    { "name": "Lost Trace", "summary": "Myth cycles (60–100 pages)." },
+    { "name": "Detection Found", "summary": "Myth cycles (60–100 pages)." }
+  ]
+}
