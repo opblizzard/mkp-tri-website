@@ -18,7 +18,13 @@ module.exports = {
           accentSoft: "#fde68a",
           text: "#f9fafb",
           muted: "#9ca3af"
-        }
+        },
+        'codex-bg': '#0f172a',
+        'codex-accent': '#06b6d4',
+        'glass-border': 'rgba(255,255,255,0.1)'
+      },
+      backdropBlur: {
+        xs: '2px',
       }
     }
   },
